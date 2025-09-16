@@ -1,10 +1,11 @@
 // api.js
+const API_URL = import.meta.env.VITE_API_URL
 export default {
 
   async login(data){
     try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          const res=await fetch("http://localhost:5000/utilisateur/login",{
+          const res=await fetch(`${API_URL}/utilisateur/login`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -23,7 +24,7 @@ export default {
   },
 async me() {
     try {
-      const res = await fetch("http://localhost:5000/utilisateur/me", {
+      const res = await fetch(`${API_URL}/utilisateur/me`, {
         credentials: "include",
       });
 
@@ -37,7 +38,7 @@ async me() {
   async logout(){
     try{
           //await new Promise(resolve=>setTimeout(resolve,2000));
-          const res=await fetch("http://localhost:5000/utilisateur/logout",{
+          const res=await fetch(`${API_URL}/utilisateur/logout`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -54,7 +55,7 @@ async me() {
   async changePassword(idUser,mot_de_passe){
     try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          const res=await fetch(`http://localhost:5000/utilisateur/${idUser}/password`,{
+          const res=await fetch(`${API_URL}/utilisateur/${idUser}/password`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -72,7 +73,7 @@ async me() {
   //Récuperer tous les utilisateurs
   async getUsers() {
     try {
-      const response = await fetch("http://localhost:5000/utilisateur", {
+      const response = await fetch(`${API_URL}/utilisateur`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -95,7 +96,7 @@ async me() {
     async addUser(userData){
       try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          await fetch("http://localhost:5000/utilisateur/register",{
+          await fetch(`${API_URL}/utilisateur/register`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),       
@@ -108,7 +109,7 @@ async me() {
 
   async deleteUser(idToDelete){
     try{
-        await fetch(`http://localhost:5000/utilisateur/${idToDelete}`,{
+        await fetch(`${API_URL}/utilisateur/${idToDelete}`,{
         method:"DELETE"
       });
     }
@@ -121,7 +122,7 @@ async me() {
 
   async getMateriels() {
     try {
-      const response = await fetch("http://localhost:5000/materiel", {
+      const response = await fetch(`${API_URL}/materiel`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -145,7 +146,7 @@ async me() {
     try {
       console.log(idAgent);
       
-      const response = await fetch(`http://localhost:5000/materiel/${idAgent}`, {
+      const response = await fetch(`${API_URL}/materiel/${idAgent}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -168,7 +169,7 @@ async me() {
       async addMateriel(materielData){
       try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          await fetch("http://localhost:5000/materiel",{
+          await fetch(`${API_URL}/materiel`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(materielData),       
@@ -182,7 +183,7 @@ async me() {
     },
       async deleteMateriel(idToDelete){
     try{
-        await fetch(`http://localhost:5000/materiel/${idToDelete}`,{
+        await fetch(`${API_URL}/materiel/${idToDelete}`,{
         method:"DELETE"
       });
     }
@@ -195,7 +196,7 @@ async me() {
         async modifMateriel(idToModif,newMateriel){
     try{
         await new Promise(resolve=>setTimeout(resolve,2000));
-        await fetch(`http://localhost:5000/materiel/${idToModif}`,{
+        await fetch(`${API_URL}/materiel/${idToModif}`,{
         method:"PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMateriel),       
@@ -210,7 +211,7 @@ async me() {
       async reaffectMateriel(idTMateriel,nouvelUtilisateur){
     try{
         await new Promise(resolve=>setTimeout(resolve,2000));
-        await fetch(`http://localhost:5000/materiel/${idTMateriel}/reaffect`,{
+        await fetch(`${API_URL}/materiel/${idTMateriel}/reaffect`,{
         method:"PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nouvelUtilisateur),       
@@ -227,7 +228,7 @@ async me() {
       async addSite(siteData){
       try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          await fetch("http://localhost:5000/site",{
+          await fetch(`${API_URL}/site`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(siteData)       
@@ -241,7 +242,7 @@ async me() {
     },
     async getSites() {
     try {
-      const response = await fetch("http://localhost:5000/site", {
+      const response = await fetch(`${API_URL}/site`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -262,7 +263,7 @@ async me() {
 
       async deleteSite(idToDelete){
     try{
-        await fetch(`http://localhost:5000/site/${idToDelete}`,{
+        await fetch(`${API_URL}/site/${idToDelete}`,{
         method:"DELETE"
       });
     }
@@ -275,7 +276,7 @@ async me() {
       async addAgent(agentData){
       try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          await fetch("http://localhost:5000/agent",{
+          await fetch(`${API_URL}/agent`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(agentData)       
@@ -289,7 +290,7 @@ async me() {
     },
     async getAgents() {
     try {
-      const response = await fetch("http://localhost:5000/agent", {
+      const response = await fetch(`${API_URL}/agent`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -309,7 +310,7 @@ async me() {
   },
     async deleteAgent(idToDelete){
     try{
-        await fetch(`http://localhost:5000/agent/${idToDelete}`,{
+        await fetch(`${API_URL}/agent/${idToDelete}`,{
         method:"DELETE"
       });
     }
@@ -321,7 +322,7 @@ async me() {
 
       async getTypesMateriels() {
     try {
-      const response = await fetch("http://localhost:5000/type-materiel", {
+      const response = await fetch(`${API_URL}/type-materiel`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -344,7 +345,7 @@ async me() {
         async addTypeMateriel(typeMaterielData){
       try{
           await new Promise(resolve=>setTimeout(resolve,2000));
-          await fetch("http://localhost:5000/type-materiel",{
+          await fetch(`${API_URL}/type-materiel`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(typeMaterielData)       
@@ -359,7 +360,7 @@ async me() {
 
     async deleteTypeMateriel(idToDelete){
     try{
-        await fetch(`http://localhost:5000/type-materiel/${idToDelete}`,{
+        await fetch(`${API_URL}/type-materiel/${idToDelete}`,{
         method:"DELETE"
       });
     }
