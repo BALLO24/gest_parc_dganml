@@ -24,7 +24,7 @@ import NouvelProjecteur from "../components/NouvelProjecteur";
 import NouvelControleur from "../components/NouvelControleur";
 
 
-import DetailModalOrdinateur from "../components/detailModalOrdinateur";
+import DetailModalOrdinateur from "../components/DetailModalOrdinateur";
 import DetailModalImprimante from "../components/DetailModalImprimante";
 import DetailModalCopieur from "../components/DetailModalCopieur";
 import DetailModalOnduleur from "../components/DetailModalOnduleur";

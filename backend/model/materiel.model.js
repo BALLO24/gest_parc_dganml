@@ -4,24 +4,28 @@ const mongoose = require("mongoose");
 const materielSchema = new mongoose.Schema({
   marque: String,
   modele: String,
-  noSerie:String,
+  noSerie: String,
   dateAchat: String,
-  etat:String,
-  commentaire:String,
-  userActuel:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Agent"
+  etat: String,
+  commentaire: String,
+  userActuel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Agent"
   },
-  dateAffect:String,
-  historique:[
+  dateAffect: String,
+  historique: [
     {
-        user:String,
-        site:String,
-        dateAffect:String,
-        dateReprise:String
+      user: String,
+      site: String,
+      dateAffect: String,
+      dateReprise: String
     }
   ]
-}, { discriminatorKey: '__t', collection: 'materiels' },{timestamps:true});
+}, {
+  discriminatorKey: '__t',
+  collection: 'materiels',
+  timestamps: true
+});
 
 // Modèle parent
 const Materiel = mongoose.model("Materiel", materielSchema);

@@ -12,7 +12,7 @@ module.exports.getAllMateriels=async(req,res)=>{
                 path:"site",
                 select:"nom"
             }
-        });
+        }).sort({createdAt:-1});
         res.status(200).json({materiels,message:"Materiels recupérés avec succès"})
         
     }
@@ -80,14 +80,10 @@ module.exports.deleteMateriel=async (req,res)=>{
       const deletedMateriel = await Materiel.findByIdAndDelete(idToDelete);
       if(!deletedMateriel){
         return res.status(404).json({ message: "Materiel non trouvé" }); }
-         else{
-          console.log("delted",deletedMateriel);
-          
+         else{          
           const idUser=deletedMateriel.userActuel;
-          console.log("idUser",idUser);
           
           const lastUser=await Agent.findById(idUser);
-          console.log("user actuel",lastUser);
           
           //const message=`L'équipement ${deletedMateriel.__t} de No Série ${deletedMateriel.noSerie} appartenant à ${lastUser.prenom} ${lastUser.nom} de matricule ${lastUser.matricule} vient d'être supprimé de la base.`
           const message = `
