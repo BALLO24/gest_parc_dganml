@@ -35,11 +35,11 @@ const handleSubmit = async (values) => {
       const isLogged = await API.login(values);
 
       if (isLogged) {
-        await refreshUser(); // ✅ on recharge l’utilisateur après login
+        await refreshUser(); // on recharge l’utilisateur après login
         navigate("/app/");
       } else {
         setShowErrorToast(true);
-        setTimeout(() => setShowErrorToast(false), 4000);
+        setTimeout(() => setShowErrorToast(false), 2000);
       }
     } catch (err) {
       console.error("Erreur login:", err);
