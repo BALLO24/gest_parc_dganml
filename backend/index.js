@@ -23,6 +23,7 @@ const PORT=process.env.PORT
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
+<<<<<<< HEAD
 // app.use(cors({
 //     origin:"http://localhost:5173",
 //     credentials:true,
@@ -31,16 +32,26 @@ app.use(cookieParser());
 
 const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","http://10.133.2.5000"];
 
+=======
+>>>>>>> 9b0a9f2a25c07ca5e7fec3f8d267f047ad5ebd0f
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Requete bloqué par CORS"));
-    }
-  },
-  credentials: true,
+    origin:true,
+    credentials:true,
+    
 }));
+
+// const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","http://10.133.2.55:3000"];
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Requete bloqué par CORS"));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 
 app.use(

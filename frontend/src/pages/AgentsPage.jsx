@@ -208,8 +208,8 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.matricule}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.prenom}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.nom}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.site.nom}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600 capitalize ">{item.site.typeSite}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item?.site.nom || "-"}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600 capitalize ">{item.site?.typeSite || "-"}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.telephone}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.email}</td>
                   
