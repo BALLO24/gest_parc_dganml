@@ -29,7 +29,7 @@ app.use(cookieParser());
     
 // }));
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","http://10.133.2.5000"];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -84,5 +84,5 @@ app.post("/mail",async (req,res)=>{
     }
 })
 
-app.listen(PORT,()=>console.log(`Le serveur express tourne sur le port ${PORT}`)
+app.listen(PORT,"0.0.0.0",()=>console.log(`Le serveur express tourne sur le port ${PORT}`)
 );

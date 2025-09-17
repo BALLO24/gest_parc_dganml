@@ -1,0 +1,2 @@
+les dossiers Nginx et mongo_data sont utilisés par docker le mongo_data est utilisé pour la persistance des data du db du conteneur
+Pou un déployer il faut le ouvrir fichier ./frontend/.env et reconfigurer API_URL qui celle du serveur phyique hébergeant le docker. 

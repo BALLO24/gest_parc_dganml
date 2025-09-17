@@ -5,9 +5,7 @@ const sendMail=require("../function/sendMail")
 module.exports.signUp=async (req,res)=>{
     try{
         const {matricule,nom,prenom,telephone,email,commentaires}=req.body;
-        mot_de_passe=generateurMotDePasse(6)
-        console.log(mot_de_passe);
-        
+        mot_de_passe=generateurMotDePasse(6)        
         const utilisateur=new Utilisateur({matricule,nom,prenom,telephone,email,mot_de_passe,commentaires})
         await utilisateur.save();
       const message=`
@@ -64,10 +62,7 @@ const objet="Création de compte Gest Parc"
 }   
 
 module.exports.signIn=async (req, res) => {
-  const { email, mot_de_passe } = req.body;
-  console.log("email : ",email);
-  console.log("mdp : ",mot_de_passe);
-  
+  const { email, mot_de_passe } = req.body;  
   
 
   try {
@@ -82,11 +77,7 @@ module.exports.signIn=async (req, res) => {
     req.session.userName=user.nom;
    
     //req.session.role = user.role;
-
-    console.log("id",req.session.userId);
-    
-    
-
+        
     res.json({ success:true,message: "Connexion réussie", user: { id: user._id, email: user.email, nom:user.nom } });
   } catch (err) {
     console.error(err);
@@ -108,7 +99,6 @@ module.exports.changePassword = async (req, res) => {
   try {
     const {idUser} = req.params;
     const { mot_de_passe } = req.body;
-    console.log(idUser);
     
 
     // if (!password || password.length < 3) {

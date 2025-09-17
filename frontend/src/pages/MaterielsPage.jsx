@@ -464,19 +464,19 @@ export default function MaterielsPage(){
                 </button> */}
 
                 {/* Desktop-Version */}
-                <div className="hidden md:block">
-                    <table className="min-w-full divide-y divide-gray-200 overflow-hidden">
+                <div className="hidden md:block overflow-y-auto max-h-96">
+                    <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse ">
                         <thead className="bg-gray-200">
                             <tr>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">No</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Type</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Marque</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Modele</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">No Serie</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Propriétaire</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Site</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Etat</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Action</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Type</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Marque</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Modele</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No Serie</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Propriétaire</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Site</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Etat</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Action</th>
                             </tr>
                         </thead>
                         
@@ -491,7 +491,7 @@ export default function MaterielsPage(){
                                     <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.userActuel.prenom} {" "} {item.userActuel.nom}</td>
                                     <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.userActuel.site.nom}</td>
                                     <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.etat}</td>
-                                    <td className="px-6 py-2 whitespace-nowrap text-gray-600">
+                                    <td className="px-6 py-2 whitespace-nowrap text-gray-600 ">
                                         <div className="relative inline-block text-left">
                                             <div>
                                                 <button
@@ -507,8 +507,8 @@ export default function MaterielsPage(){
                                             </div>
 
                                             {openDropdownId === item._id && (
-                                            <div className=" fixed mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-30">
-                                                <div className="py-1 z-50">
+                                            <div className=" absolute mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-30">
+                                                <div className="py-1 z-40">
                                                 <button
                                                     onClick={()=>openDetailMaterial(item)}
                                                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"

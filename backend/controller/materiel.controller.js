@@ -76,7 +76,6 @@ module.exports.addMateriel=async(req,res)=>{
 module.exports.deleteMateriel=async (req,res)=>{
     try{
        const {idToDelete}=req.params;
-       console.log(idToDelete);
       const deletedMateriel = await Materiel.findByIdAndDelete(idToDelete);
       if(!deletedMateriel){
         return res.status(404).json({ message: "Materiel non trouvé" }); }
@@ -85,7 +84,6 @@ module.exports.deleteMateriel=async (req,res)=>{
           
           const lastUser=await Agent.findById(idUser);
           
-          //const message=`L'équipement ${deletedMateriel.__t} de No Série ${deletedMateriel.noSerie} appartenant à ${lastUser.prenom} ${lastUser.nom} de matricule ${lastUser.matricule} vient d'être supprimé de la base.`
           const message = `
 
 <!DOCTYPE html>
@@ -232,9 +230,6 @@ module.exports.reaffectMateriel=async(req,res)=>{
     const {nouvelUtilisateur}=req.body;
   //Trouver les info du nouveau user pour l'envoi de mail
   const newUser=await Agent.findById(nouvelUtilisateur);
-  console.log("nom",newUser.nom);
-  console.log("prenom",newUser.prenom);
-  console.log("matricule",newUser.matricule);
 
 
     const materiel = await Materiel.findById(idMateriel).populate({

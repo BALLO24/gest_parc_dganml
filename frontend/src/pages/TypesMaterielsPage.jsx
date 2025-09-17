@@ -157,13 +157,13 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
         </button>
 
         {/* Desktop-Version */}
-        <div className="hidden md:block">
-          <table className="min-w-full divide-y divide-gray-200 overflow-hidden">
+        <div className="hidden md:block overflow-y-auto max-h-96">
+          <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse">
             <thead className="bg-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">No</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Nom</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Action</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Nom</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Action</th>
               </tr>
             </thead>
 
