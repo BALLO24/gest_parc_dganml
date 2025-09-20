@@ -87,15 +87,22 @@ const ModifImprimante = ({ isOpenFormModifImprimante, closeFormModifImprimante, 
         };
         load();
       }, []);
-  
+      const formatDateInput = (value) => {
+    if (!value) return "Non spécifié !"
+    const [year, month, day] = value.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { _id, ...dataForm } = Object.fromEntries(formData.entries());
+    const { _id,dateAchatNonFormatted ,...dataForm } = Object.fromEntries(formData.entries());
+    const dateAchat=formatDateInput(dateAchatNonFormatted);
+    const finalData={dateAchat,...dataForm}
     try {
       setIsSubmetting(true);
-      await API.modifMateriel(_id, dataForm);
+      await API.modifMateriel(_id, finalData);
       onSuccess("Imprimante modifié avec succès !");
       setIsSubmetting(false);
     } catch (err) {
@@ -139,27 +146,20 @@ const ModifImprimante = ({ isOpenFormModifImprimante, closeFormModifImprimante, 
               </option>
             ))}
           </FloatingSelect>
+
+          {/* Marque */}
+        <FloatingInput label="Marque" name="marque" defaultValue={imprimante.marque} required />
+
+          {/* Modele */}
+          <FloatingInput label="Modèle" name="modele" defaultValue={imprimante.modele} required />
+          <FloatingInput label="N° Série" name="noSerie" defaultValue={imprimante.noSerie} required />
           <FloatingSelect label="Recto verso" name="rectoVerso" required defaultValue={imprimante.rectoVerso}>
             <option value="">---</option>
             <option value="oui">Oui</option>
             <option value="non">Non</option>
           </FloatingSelect>
 
-          {/* Marque */}
-          <FloatingSelect label="Marque" name="marque" required defaultValue={imprimante.marque}>
-            {data.marqueImprimante.map((el,index) => (
-              <option key={index} value={el.nom} >
-                {el.nom}
-              </option>
-            ))}
-          </FloatingSelect>
-
-          {/* Modele */}
-          <FloatingInput label="Modèle" name="modele" defaultValue={imprimante.modele} required />
-          <FloatingInput label="N° Série" name="noSerie" defaultValue={imprimante.noSerie} required />
-
-
-          <FloatingInput label="Date d’acquisition" name="dateAchat" type="date" defaultValue={imprimante.dateAchat} required />
+          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={imprimante.dateAchat}/>
 
           {/* Etat */}
           <FloatingSelect label="État" name="etat" required defaultValue={imprimante.etat}>
@@ -199,8 +199,7 @@ const ModifImprimante = ({ isOpenFormModifImprimante, closeFormModifImprimante, 
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Mise à jour..." : "Mettre à jour"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Mettre à jour"}
           </button>
         </div>
       </form>

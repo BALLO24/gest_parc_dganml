@@ -1,4 +1,4 @@
-const {Materiel,Ordinateur,Copieur,Imprimante,Onduleur,Routeur,Switch,Controleur,Projecteur}=require("../model/materiel.model");
+const {Materiel,Ordinateur,Copieur,Imprimante,Scanner,Onduleur,PareFeu,Routeur,Switch,Controleur,Projecteur,AutoComm,Telephone,NAS,AP,KVM,Antenne}=require("../model/materiel.model");
 //const Utilisateur=require("../model/utilisateur.model")
 const Agent =require("../model/agent.model")
 const sendMail=require("../function/sendMail");
@@ -39,10 +39,19 @@ module.exports.addMateriel=async(req,res)=>{
                 const imprimante=new Imprimante(data)
                 await imprimante.save();                
                 break;
+            case "scanner":
+                const scanner=new Scanner(data)
+                await scanner.save();                
+                break;
             case "onduleur":
                 const onduleur=new Onduleur(data)
                 await onduleur.save();                
                 break;
+            case "pareFeu":
+                const pareFeu=new PareFeu(data)
+                await pareFeu.save();                
+                break;
+                
             case "routeur":
                 const routeur=new Routeur(data)
                 await routeur.save();                
@@ -59,7 +68,30 @@ module.exports.addMateriel=async(req,res)=>{
                 const projecteur=new Projecteur(data)
                 await projecteur.save();                
                 break;
-
+            case "autoComm":
+                const autoComm=new AutoComm(data)
+                await autoComm.save();                
+                break;
+            case "telephone":
+                const telephone=new Telephone(data) 
+                await telephone.save();                
+                break;
+            case "AP":
+                const ap=new AP(data)
+                await ap.save();                
+                break;
+            case "NAS":
+                const nas=new NAS(data)
+                await nas.save();                
+                break;
+            case "KVM":
+                const kvm=new KVM(data)
+                await kvm.save();                
+                break;
+            case "antenne":
+                const antenne=new Antenne(data)
+                await antenne.save();                
+                break;
 
         }
         res.status(201).send(`${type} est crée avec succès`)
@@ -207,7 +239,6 @@ const updatedMateriel = await Model.findByIdAndUpdate(
   { $set: updates },
   { new: true, runValidators: true }
 );
-console.log("second data",updatedMateriel);
     if (!updatedMateriel) {
       return res.status(404).json({ message: "Materiel non trouvé" });
     }

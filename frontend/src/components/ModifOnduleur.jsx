@@ -87,15 +87,22 @@ const ModifOnduleur = ({ isOpenFormModifOnduleur, closeFormModifOnduleur, ondule
         };
         load();
       }, []);
-  
+    const formatDateInput = (value) => {
+    if (!value) return "Non spécifié !"
+    const [year, month, day] = value.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { _id, ...dataForm } = Object.fromEntries(formData.entries());
+    const { _id,dateAchatNonFormatted ,...dataForm } = Object.fromEntries(formData.entries());
+    const dateAchat=formatDateInput(dateAchatNonFormatted);
+    const finalData={dateAchat,...dataForm}
     try {
       setIsSubmetting(true);
-      await API.modifMateriel(_id, dataForm);
+      await API.modifMateriel(_id, finalData);
       onSuccess("Onduleur modifié avec succès !");
       setIsSubmetting(false);
     } catch (err) {
@@ -131,21 +138,12 @@ const ModifOnduleur = ({ isOpenFormModifOnduleur, closeFormModifOnduleur, ondule
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input type="hidden" name="_id" value={onduleur._id} />
 
-
-          {/* Marque */}
-          <FloatingSelect label="Marque" name="marque" required defaultValue={onduleur.marque}>
-            {data.marqueImprimante.map((el,index) => (
-              <option key={index} value={el.nom} >
-                {el.nom}
-              </option>
-            ))}
-          </FloatingSelect>
-
+          <FloatingInput label="Marque" name="marque" defaultValue={onduleur.marque} required />
           <FloatingInput label="Modèle" name="modele" defaultValue={onduleur.modele} required />
           <FloatingInput label="N° Série" name="noSerie" defaultValue={onduleur.noSerie} required />
 
 
-          <FloatingInput label="Date d’acquisition" name="dateAchat" type="date" defaultValue={onduleur.dateAchat} required />
+          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={onduleur.dateAchat}/>
 
           {/* Etat */}
           <FloatingSelect label="État" name="etat" required defaultValue={onduleur.etat}>
@@ -178,8 +176,7 @@ const ModifOnduleur = ({ isOpenFormModifOnduleur, closeFormModifOnduleur, ondule
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Mise à jour..." : "Mettre à jour"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Mettre à jour"}
           </button>
         </div>
       </form>

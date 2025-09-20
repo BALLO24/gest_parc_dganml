@@ -7,12 +7,14 @@ import { useEffect } from "react";
 
 
 
-const FloatingInput = ({ label, name, type = "text", required = false }) => (
+const FloatingInput = ({ label, name, type = "text", required = false, defaultValue,disabled }) => (
   <div className="relative">
     <input
       name={name}
       type={type}
       placeholder=" "
+      defaultValue={defaultValue}
+      disabled={disabled}
       required={required}
       className="peer block w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 
         focus:outline-none focus:border-blue-500 focus:ring-0 sm:text-sm text-gray-700"
@@ -28,11 +30,12 @@ const FloatingInput = ({ label, name, type = "text", required = false }) => (
   </div>
 );
 
-const FloatingSelect = ({ label, name, children, required = false }) => (
+const FloatingSelect = ({ label, name, children, required = false,defaultValue }) => (
   <div className="relative">
     <select
       name={name}
       required={required}
+      defaultValue={defaultValue}
       className="peer appearance-none block w-full rounded-md border border-gray-300 bg-transparent 
         px-3 py-2 pr-10 focus:outline-none focus:border-blue-500 sm:text-sm text-gray-700"
     >
@@ -72,9 +75,9 @@ const FloatingTextarea = ({ label, name }) => (
   </div>
 );
 
-const NouvelOnduleur = ({
-  isOpenFormNouvelOnduleur,
-  closeFormNouvelOnduleur,
+const NouvelScanner = ({
+  isOpenFormNouvelScanner,
+  closeFormNouvelScanner,
   onSuccess,
 }) => {
   const [isSubmetting, setIsSubmetting] = useState(false);
@@ -106,15 +109,13 @@ const NouvelOnduleur = ({
     const {dateAchatNonFormatted,...data}=dataObj
     const dateAchat=formatDateInput(dateAchatNonFormatted);
     const dateAffect=new Date().toLocaleDateString("fr-FR");
-    const finalData={dateAchat,dateAffect,...data};
-
-    
+    const finalData={dateAchat,dateAffect,...data};    
     
     
     try {
       setIsSubmetting(true);
       await API.addMateriel(finalData);
-      onSuccess("Onduleur ajouté avec succès !");
+      onSuccess("Scanner ajouté avec succès !");
       setIsSubmetting(false);
     } catch (err) {
       console.log(err);
@@ -122,7 +123,7 @@ const NouvelOnduleur = ({
     }
   };
 
-  if (!isOpenFormNouvelOnduleur) return null;
+  if (!isOpenFormNouvelScanner) return null;
 
   return createPortal(
     <div
@@ -136,27 +137,32 @@ const NouvelOnduleur = ({
         className="relative bg-white rounded-lg shadow-xl w-full max-w-xl p-6 transform transition-all duration-300 scale-100 opacity-100"
       >
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
-          Ajouter un nouvel onduleur
+          Ajouter un scanner
         </h3>
 
         {/* Bouton fermer */}
         <button
           type="button"
-          onClick={closeFormNouvelOnduleur}
+          onClick={closeFormNouvelScanner}
           className="absolute text-xl right-4 top-4 text-gray-500 hover:text-red-600 font-bold"
         >
           ✕
         </button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="hidden" name="type" value="onduleur" />
+          <input type="hidden" name="type" value="scanner" />
 
 
           <FloatingInput label="Marque" name="marque" required />
           <FloatingInput label="Modèle" name="modele" required />
           <FloatingInput label="N° série" name="noSerie" required />
-
           <FloatingInput label="Date acquisition" type="date" name="dateAchatNonFormatted"/>
+
+            <FloatingSelect label="Recto verso" name="rectoVerso" required>
+            <option value="">---</option>
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
+          </FloatingSelect>
 
           <FloatingSelect label="État" name="etat" required>
             <option value="">---</option>
@@ -167,13 +173,16 @@ const NouvelOnduleur = ({
             <option value="Vétuste">Vétuste</option>
           </FloatingSelect>
 
-          <FloatingSelect label="Type" name="typeOnduleur" defaultVa required>
+
+          <FloatingSelect label="Type Bac" name="typeBac" required>
             <option value="">---</option>
-            <option value="Mini-onduleur">Mini-onduleur</option>
-            <option value="Grande capacité">Grande capacité</option>
+            <option value="Chargeur">Chargeur</option>
+            <option value="Plateau">Plateau</option>
+            <option value="Chargeur + Plateau">Chargeur + Plateau</option>
           </FloatingSelect>
-          <FloatingInput label="Puissance" name="puissance" required />
+
           <FloatingSelect label="Utilisateur actuel" name="userActuel" required>
+            <option value="">---</option>
             {agents.map((agent, index) => (
               <option key={index} value={agent._id}>
                 {agent.nom} {" "} {agent.prenom}
@@ -203,4 +212,4 @@ const NouvelOnduleur = ({
   );
 };
 
-export default NouvelOnduleur;
+export default NouvelScanner;

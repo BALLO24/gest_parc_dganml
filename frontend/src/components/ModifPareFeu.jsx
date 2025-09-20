@@ -72,7 +72,7 @@ const FloatingTextarea = ({ label, name, defaultValue = "" }) => (
 );
 
 // --- Composant principal ---
-const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, onSuccess }) => {
+const ModifPareFeu = ({ isOpenFormModifPareFeu, closeFormModifPareFeu, pareFeu, onSuccess }) => {
   const [isSubmetting, setIsSubmetting] = useState(false);
   const [agents,setAgents]=useState([]);
       useEffect(() => {
@@ -93,6 +93,8 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
     const [year, month, day] = value.split("-");
     return `${day}/${month}/${year}`;
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -102,7 +104,7 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
     try {
       setIsSubmetting(true);
       await API.modifMateriel(_id, finalData);
-      onSuccess("Copieur modifié avec succès !");
+      onSuccess("Pare Feu modifié avec succès !");
       setIsSubmetting(false);
     } catch (err) {
       console.log(err);
@@ -110,7 +112,7 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
     }
   };
 
-  if (!isOpenFormModifCopieur) return null;
+  if (!isOpenFormModifPareFeu) return null;
 
   return createPortal(
     <div
@@ -123,65 +125,46 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
         onSubmit={handleSubmit}
         className="relative bg-white rounded-lg shadow-xl w-full max-w-3xl p-6 transform transition-all duration-300 scale-100 opacity-100"
       >
-        <h3 className="text-lg font-semibold text-gray-700 mb-4">Modifier un copieur</h3>
+        <h3 className="text-lg font-semibold text-gray-700 mb-4">Modifier un Pare Feu</h3>
 
         {/* Bouton fermer */}
         <button
           type="button"
-          onClick={closeFormModifCopieur}
+          onClick={closeFormModifPareFeu}
           className="absolute text-xl right-4 top-4 text-gray-500 hover:text-red-600 font-bold"
         >
           ✕
         </button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="hidden" name="_id" value={copieur._id} />
+          <input type="hidden" name="_id" value={pareFeu._id} />
 
-          <FloatingSelect label="Recto verso" name="rectoVerso" required defaultValue={copieur.rectoVerso}>
-            <option value="">---</option>
-            <option value="oui">Oui</option>
-            <option value="non">Non</option>
-          </FloatingSelect>
 
           {/* Marque */}
-          <FloatingSelect label="Marque" name="marque" required defaultValue={copieur.marque}>
-            {data.marqueImprimante.map((el,index) => (
-              <option key={index} value={el.nom} >
-                {el.nom}
-              </option>
-            ))}
-          </FloatingSelect>
+          <FloatingInput label="Marque" name="marque" defaultValue={pareFeu.marque} required />
 
-          {/* Modele */}
-          <FloatingInput label="Modèle" name="modele" defaultValue={copieur.modele} required />
-          <FloatingInput label="N° Série" name="noSerie" defaultValue={copieur.noSerie} required />
-
-
-          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={copieur.dateAchat}/>
+          <FloatingInput label="Modèle" name="modele" defaultValue={pareFeu.modele} required />
+          <FloatingInput label="N° Série" name="noSerie" defaultValue={pareFeu.noSerie} required />
+          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={pareFeu.dateAchat} />
 
           {/* Etat */}
-          <FloatingSelect label="État" name="etat" required defaultValue={copieur.etat}>
+          <FloatingSelect label="État" name="etat" required defaultValue={pareFeu.etat}>
             {data.etatMateriel.map((el,index) => (
               <option key={index} value={el.nom}>
                 {el.nom}
               </option>
             ))}
           </FloatingSelect>
-          <FloatingSelect label="Couleur" name="couleur" required defaultValue={copieur.couleur}>
-            <option value="">---</option>
-            <option value="Monochrome">Monochrome</option>
-            <option value="En Couleur">En couleur</option>
-          </FloatingSelect>
-
+          <FloatingInput label="Nombre de port" name="nbrePort" defaultValue={pareFeu.nbrePort} required />
           <FloatingSelect label="Utilisateur actuel" name="userActuel" required disabled>
             {agents.map((agent, index) => (
-              <option key={index} value={agent._id} selected={agent._id===copieur.userActuel._id}>
+              <option key={index} value={agent._id} selected={agent._id===pareFeu.userActuel._id}>
                 {agent.prenom} {" "} {agent.nom}
               </option>
             ))}
           </FloatingSelect>
 
-          <FloatingTextarea label="Autres informations" name="commentaire" defaultValue={copieur.commentaire} />
+          <FloatingTextarea label="Autres informations" name="commentaire" defaultValue={pareFeu.commentaire} />
         </div>
 
         <div className="flex justify-end mt-6">
@@ -190,8 +173,7 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Mise à jour..." : "Mettre à jour"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Mise à jour"}
           </button>
         </div>
       </form>
@@ -200,4 +182,4 @@ const ModifCopieur = ({ isOpenFormModifCopieur, closeFormModifCopieur, copieur, 
   );
 };
 
-export default ModifCopieur;
+export default ModifPareFeu;

@@ -92,7 +92,7 @@ const NouvelRouteur = ({
     }, []);
   
     const formatDateInput = (value) => {
-      if (!value) return "";
+      if (!value) return "Non spécificié !";
       const [year, month, day] = value.split("-");
       return `${day}/${month}/${year}`;
     };
@@ -158,7 +158,7 @@ const NouvelRouteur = ({
           <FloatingInput label="Modèle" name="modele" required />
           <FloatingInput label="N° série" name="noSerie" required />
           <FloatingInput label="Vitesse" name="vitesse" required />
-          <FloatingInput label="Date acquisition" type="date" name="dateAchat" required />
+          <FloatingInput label="Date acquisition" type="date" name="dateAchatNonFormatted"/>
 
           <FloatingSelect label="État" name="etat" required>
             <option value="">---</option>
@@ -166,6 +166,7 @@ const NouvelRouteur = ({
             <option value="Bon">Bon</option>
             <option value="Moyen">Moyen</option>
             <option value="Mauvais">Mauvais</option>
+            <option value="Vétuste">Vétuste</option>
           </FloatingSelect>
           <FloatingInput label="Nombre de port" type="number" name="nbrePort" required />
           <FloatingSelect label="POE" name="poe" required>

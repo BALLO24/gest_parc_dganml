@@ -72,9 +72,9 @@ const FloatingTextarea = ({ label, name }) => (
   </div>
 );
 
-const NouvelOnduleur = ({
-  isOpenFormNouvelOnduleur,
-  closeFormNouvelOnduleur,
+const NouvelKVM = ({
+  isOpenFormNouvelKVM,
+  closeFormNouvelKVM,
   onSuccess,
 }) => {
   const [isSubmetting, setIsSubmetting] = useState(false);
@@ -92,7 +92,7 @@ const NouvelOnduleur = ({
     }, []);
   
     const formatDateInput = (value) => {
-      if (!value) return "Non spécifié !";
+      if (!value) return "Non spécificié !";
       const [year, month, day] = value.split("-");
       return `${day}/${month}/${year}`;
     };
@@ -104,17 +104,19 @@ const NouvelOnduleur = ({
     const formData = new FormData(e.target);
     const dataObj = Object.fromEntries(formData.entries()); // convert FormData → objet
     const {dateAchatNonFormatted,...data}=dataObj
+    console.log(data);
     const dateAchat=formatDateInput(dateAchatNonFormatted);
     const dateAffect=new Date().toLocaleDateString("fr-FR");
     const finalData={dateAchat,dateAffect,...data};
 
+    console.log(finalData);
     
     
     
     try {
       setIsSubmetting(true);
       await API.addMateriel(finalData);
-      onSuccess("Onduleur ajouté avec succès !");
+      onSuccess("KVM ajouté avec succès !");
       setIsSubmetting(false);
     } catch (err) {
       console.log(err);
@@ -122,7 +124,7 @@ const NouvelOnduleur = ({
     }
   };
 
-  if (!isOpenFormNouvelOnduleur) return null;
+  if (!isOpenFormNouvelKVM) return null;
 
   return createPortal(
     <div
@@ -136,26 +138,25 @@ const NouvelOnduleur = ({
         className="relative bg-white rounded-lg shadow-xl w-full max-w-xl p-6 transform transition-all duration-300 scale-100 opacity-100"
       >
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
-          Ajouter un nouvel onduleur
+          Ajouter un KVM
         </h3>
 
         {/* Bouton fermer */}
         <button
           type="button"
-          onClick={closeFormNouvelOnduleur}
+          onClick={closeFormNouvelKVM}
           className="absolute text-xl right-4 top-4 text-gray-500 hover:text-red-600 font-bold"
         >
           ✕
         </button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="hidden" name="type" value="onduleur" />
+          <input type="hidden" name="type" value="KVM" />
 
 
           <FloatingInput label="Marque" name="marque" required />
           <FloatingInput label="Modèle" name="modele" required />
           <FloatingInput label="N° série" name="noSerie" required />
-
           <FloatingInput label="Date acquisition" type="date" name="dateAchatNonFormatted"/>
 
           <FloatingSelect label="État" name="etat" required>
@@ -166,13 +167,8 @@ const NouvelOnduleur = ({
             <option value="Mauvais">Mauvais</option>
             <option value="Vétuste">Vétuste</option>
           </FloatingSelect>
+          
 
-          <FloatingSelect label="Type" name="typeOnduleur" defaultVa required>
-            <option value="">---</option>
-            <option value="Mini-onduleur">Mini-onduleur</option>
-            <option value="Grande capacité">Grande capacité</option>
-          </FloatingSelect>
-          <FloatingInput label="Puissance" name="puissance" required />
           <FloatingSelect label="Utilisateur actuel" name="userActuel" required>
             {agents.map((agent, index) => (
               <option key={index} value={agent._id}>
@@ -203,4 +199,4 @@ const NouvelOnduleur = ({
   );
 };
 
-export default NouvelOnduleur;
+export default NouvelKVM;

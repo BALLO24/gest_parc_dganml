@@ -80,7 +80,7 @@ const NouvelOrdinateur = ({ isOpenFormNouvelOrdinateur, closeFormNouvelOrdinateu
   }, []);
 
   const formatDateInput = (value) => {
-    if (!value) return "";
+    if (!value) return "Non spécifié !"
     const [year, month, day] = value.split("-");
     return `${day}/${month}/${year}`;
   };
@@ -90,7 +90,6 @@ const NouvelOrdinateur = ({ isOpenFormNouvelOrdinateur, closeFormNouvelOrdinateu
     const formData = new FormData(e.target);
     const dataObj = Object.fromEntries(formData.entries()); // convert FormData → objet
     const {dateAchatNonFormatted,...data}=dataObj
-    console.log(data);
     const dateAchat=formatDateInput(dateAchatNonFormatted);
     const dateAffect=new Date().toLocaleDateString("fr-FR");
     const finalData={dateAchat,dateAffect,...data};
@@ -195,7 +194,6 @@ const NouvelOrdinateur = ({ isOpenFormNouvelOrdinateur, closeFormNouvelOrdinateu
                 type="date"
                 name="dateAchatNonFormatted"
                 className="peer block w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-blue-500 sm:text-sm text-gray-700"
-                required
               />
               <label className="absolute left-3 -top-2 z-10 px-1 text-xs text-gray-500 bg-white transition-all duration-150
                 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-600 peer-valid:-top-2 peer-valid:text-xs">
@@ -280,8 +278,7 @@ const NouvelOrdinateur = ({ isOpenFormNouvelOrdinateur, closeFormNouvelOrdinateu
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Ajout en cours..." : "Ajouter"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Ajouter"}
           </button>
         </div>
       </form>

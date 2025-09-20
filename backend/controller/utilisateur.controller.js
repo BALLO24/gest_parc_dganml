@@ -18,9 +18,9 @@ module.exports.signUp=async (req,res)=>{
   
   <!-- Contenu -->
   <div style="padding:20px;">
-    <h2 style="color:#2c7be5; margin-top:0;">Votre compte a été créé</h2>
+    <h2 style="color:#2c7be5; margin-top:0;">Votre compte a été créé </h2>
     <p>Bonjour <strong>${prenom} ${nom}</strong>,</p>
-    <p>Votre compte a été créé avec succès dans notre système.</p>
+    <p>Votre compte a été créé avec succès dans notre système dans notre système de gestion parc informatique.</p>
     
     <p>Voici vos identifiants de connexion :</p>
     <div style="background:#f4f6f8; padding:12px; border-radius:6px; margin:10px 0;">
@@ -31,7 +31,7 @@ module.exports.signUp=async (req,res)=>{
     <p><strong style="color:#d9534f;">⚠️ Pour des raisons de sécurité, merci de changer ce mot de passe dès votre première connexion.</strong></p>
     
     <p style="text-align:center;">
-      <a href="http://localhost:5000/" 
+      <a href="127.0.0.1:5173" 
          style="background:#2c7be5; color:#fff; padding:12px 20px; border-radius:6px; text-decoration:none; font-weight:bold;">
          Se connecter
       </a>

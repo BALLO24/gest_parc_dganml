@@ -10,7 +10,7 @@ const materielSchema = new mongoose.Schema({
   commentaire: String,
   userActuel: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Agent"
+    ref: "Agent",
   },
   dateAffect: String,
   historique: [
@@ -57,6 +57,52 @@ const Switch = Materiel.discriminator("Switch",
   })
 );
 
+const AutoComm = Materiel.discriminator("AutoComm",
+  new mongoose.Schema({
+    nbrePort: Number,
+  })
+);
+
+const Telephone = Materiel.discriminator("Telephone",
+  new mongoose.Schema({
+    intGraphique: String,
+  })
+);
+
+const NAS = Materiel.discriminator("NAS",
+  new mongoose.Schema({
+    nbreSlotDisque: String,
+  })
+);
+
+const AP = Materiel.discriminator("AP",
+  new mongoose.Schema({
+    
+  })
+);
+
+const KVM = Materiel.discriminator("KVM",
+  new mongoose.Schema({
+    
+  })
+);
+
+const Antenne = Materiel.discriminator("Antenne",
+  new mongoose.Schema({
+    diametre:String
+  })
+);
+
+
+
+const PareFeu = Materiel.discriminator("PareFeu",
+  new mongoose.Schema({
+    nbrePort: String,
+  })
+);
+
+
+
 // Discriminator Routeur
 const Routeur = Materiel.discriminator("Routeur",
   new mongoose.Schema({
@@ -72,6 +118,13 @@ const Imprimante = Materiel.discriminator("Imprimante",
     typeImprimante:String, //simple ou multifonction
     typeBac: String,
     couleur: String,
+    rectoVerso:String
+  })
+);
+
+const Scanner = Materiel.discriminator("Scanner",
+  new mongoose.Schema({
+    typeBac: String,
     rectoVerso:String
   })
 );
@@ -111,4 +164,4 @@ const Projecteur = Materiel.discriminator("Projecteur",
 
 
 
-module.exports = { Materiel, Ordinateur,Onduleur, Switch, Routeur, Copieur,Imprimante,Controleur,Projecteur };
+module.exports = { Materiel, Ordinateur,Onduleur, Switch, Routeur,PareFeu, AutoComm,Telephone,Copieur,Imprimante,Scanner,Controleur,Projecteur,NAS,AP,KVM,Antenne };

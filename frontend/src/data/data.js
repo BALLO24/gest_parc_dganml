@@ -139,27 +139,22 @@ typeDisquedur:[
         {
             id:1,
             nom:"Excellent",
-            value:"excellent",
+            value:"Excellent",
         },
         {
             id:2,
-            nom:"Très Bon",
-            value:"tresBon",
+            nom:"Bon",
+            value:"Bon",
         },
         {
             id:3,
-            nom:"Bon",
-            value:"bon",
+            nom:"Mauvais",
+            value:"Mauvais",
         },
         {
             id:4,
-            nom:"Mauvais",
-            value:"mauvais",
-        },
-        {
-            id:5,
-            nom:"Très mauvais",
-            value:"tresMauvais",
+            nom:"Vétuste",
+            value:"Vétuste",
         },
     ],
     systemeExploitaion:[

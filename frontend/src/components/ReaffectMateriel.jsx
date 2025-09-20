@@ -94,8 +94,7 @@ const ReaffectMateriel = ({ isOpenModalInfo, onCloseModalInfo, materiel, onSucce
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Réaffectation en cours..." : "Réaffecter"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Réaffecter"}
           </button>
         </div>
       </form>

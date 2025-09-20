@@ -88,14 +88,22 @@ const ModifRouteur = ({ isOpenFormModifRouteur, closeFormModifRouteur, routeur, 
         load();
       }, []);
   
+    const formatDateInput = (value) => {
+    if (!value) return "Non spécifié !"
+    const [year, month, day] = value.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { _id, ...dataForm } = Object.fromEntries(formData.entries());
+    const { _id,dateAchatNonFormatted ,...dataForm } = Object.fromEntries(formData.entries());
+    const dateAchat=formatDateInput(dateAchatNonFormatted);
+    const finalData={dateAchat,...dataForm}
     try {
       setIsSubmetting(true);
-      await API.modifMateriel(_id, dataForm);
+      await API.modifMateriel(_id, finalData);
       onSuccess("Routeur modifié avec succès !");
       setIsSubmetting(false);
     } catch (err) {
@@ -139,7 +147,7 @@ const ModifRouteur = ({ isOpenFormModifRouteur, closeFormModifRouteur, routeur, 
           <FloatingInput label="N° Série" name="noSerie" defaultValue={routeur.noSerie} required />
           <FloatingInput label="Vitesse" name="vitesse" defaultValue={routeur.vitesse} required />
 
-          <FloatingInput label="Date d’acquisition" name="dateAchat" type="date" defaultValue={routeur.dateAchat} required />
+          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={routeur.dateAchat} />
 
           {/* Etat */}
           <FloatingSelect label="État" name="etat" required defaultValue={routeur.etat}>
@@ -167,8 +175,7 @@ const ModifRouteur = ({ isOpenFormModifRouteur, closeFormModifRouteur, routeur, 
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Mise à jour..." : "Mettre à jour"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Mise à jour"}
           </button>
         </div>
       </form>

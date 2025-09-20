@@ -17,42 +17,82 @@ import { useNavigate } from "react-router-dom";
 import NouvelOrdinateur from "../components/NouvelOrdinateur";
 import NouvelImprimante from "../components/NouvelImprimante";
 import NouvelOnduleur from "../components/NouvelOnduleur";
+import NouvelPareFeu from "../components/NouvelPareFeu";
 import NouvelCopieur from "../components/NouvelCopieur";
 import NouvelRouteur from "../components/NouvelRouteur";
 import NouvelSwitch from "../components/NouvelSwitch";
 import NouvelProjecteur from "../components/NouvelProjecteur";
 import NouvelControleur from "../components/NouvelControleur";
+import NouvelScanner from "../components/NouvelScanner";
+import NouvelAutoComm from "../components/NouvelAutoComm";
+import NouvelTelephone from "../components/NouvelTelephone";
+import NouvelNAS from "../components/NouvelNAS";
+import NouvelAP from "../components/NouvelAP";
+import NouvelKVM from "../components/NouvelKVM";
+import NouvelAntenne from "../components/NouvelAntenne";
+
 
 
 import DetailModalOrdinateur from "../components/DetailModalOrdinateur";
 import DetailModalImprimante from "../components/DetailModalImprimante";
 import DetailModalCopieur from "../components/DetailModalCopieur";
 import DetailModalOnduleur from "../components/DetailModalOnduleur";
+import DetailModalPareFeu from "../components/DetailModalPareFeu";
 import DetailModalRouteur from "../components/DetailModalRouteur";
 import DetailModalSwitch from "../components/DetailModalSwitch";
 import DetailModalControleur from "../components/DetailModalControleur";
 import DetailModalProjecteur from "../components/DetailModalProjecteur";
+import DetailModalScanner from "../components/DetailModalScanner";
+import DetailModalTelephone from "../components/DetailModalTelephone";
+import DetailModalNAS from "../components/DetailModalNAS";
+import DetailModalAP from "../components/DetailModalAP";
+import DetailModalKVM from "../components/DetailModalKVM";
+import DetailModalAntenne from "../components/DetailModalAntenne";
+
 
 import ModifOrdinateur from "../components/ModifOrdinateur";
 import ModifImprimante from "../components/ModifImprimante";
 import ModifCopieur from "../components/ModifCopieur";
 import ModifOnduleur from "../components/ModifOnduleur";
+import ModifPareFeu from "../components/ModifPareFeu";
 import ModifRouteur from "../components/ModifRouteur";
 import ModifSwitch from "../components/ModifSwitch";
 import ModifControleur from "../components/ModifControleur";
 import ModifProjecteur from "../components/ModifProjecteur";
+import ModifScanner from "../components/ModifScanner";
+import ModifNAS from "../components/ModifNAS";
+import ModifAP from "../components/ModifAP";
+import ModifKVM from "../components/ModifKVM";
+import ModifAntenne from "../components/ModifAntenne";
+
+
 
 import ReaffectMateriel from "../components/ReaffectMateriel";
+import DetailModalAutoComm from "../components/DetailModalAutoComm";
+import ModifAutoComm from "../components/ModifAutoComm";
+import ModifTelephone from "../components/ModifTelePhone";
 
 export default function MaterielsPage(){
   const [isOpenFormNouvelOrdinateur,setIsOpenFormNouvelOrdinateur]=useState(false);
   const [isOpenFormNouvelImprimante,setIsOpenFormNouvelImprimante]=useState(false);
   const [isOpenFormNouvelCopieur,setIsOpenFormNouvelCopieur]=useState(false);
   const [isOpenFormNouvelOnduleur,setIsOpenFormNouvelOnduleur]=useState(false);
+  const [isOpenFormNouvelPareFeu,setIsOpenFormNouvelPareFeu]=useState(false);
   const [isOpenFormNouvelRouteur,setIsOpenFormNouvelRouteur]=useState(false);
   const [isOpenFormNouvelSwitch,setIsOpenFormNouvelSwitch]=useState(false);
   const [isOpenFormNouvelControleur,setIsOpenFormNouvelControleur]=useState(false);
   const [isOpenFormNouvelProjecteur,setIsOpenFormNouvelProjecteur]=useState(false);
+  const [isOpenFormNouvelScanner,setIsOpenFormNouvelScanner]=useState(false);
+  const [isOpenFormNouvelAutoComm,setIsOpenFormNouvelAutoComm]=useState(false);
+  const [isOpenFormNouvelTelephone,setIsOpenFormNouvelTelephone]=useState(false);
+  const [isOpenFormNouvelAP,setIsOpenFormNouvelAP]=useState(false);
+  const [isOpenFormNouvelNAS,setIsOpenFormNouvelNAS]=useState(false);
+  const [isOpenFormNouvelKVM,setIsOpenFormNouvelKVM]=useState(false);
+  const [isOpenFormNouvelAntenne,setIsOpenFormNouvelAntenne]=useState(false);
+
+
+
+
 
   
 
@@ -60,10 +100,20 @@ export default function MaterielsPage(){
   const [isOpenFormModifImprimante,setIsOpenFormModifImprimante]=useState(false);
   const [isOpenFormModifCopieur,setIsOpenFormModifCopieur]=useState(false);
   const [isOpenFormModifOnduleur,setIsOpenFormModifOnduleur]=useState(false);
+  const [isOpenFormModifPareFeu,setIsOpenFormModifPareFeu]=useState(false);
   const [isOpenFormModifRouteur,setIsOpenFormModifRouteur]=useState(false);
   const [isOpenFormModifSwitch,setIsOpenFormModifSwitch]=useState(false);
   const [isOpenFormModifControleur,setIsOpenFormModifControleur]=useState(false);
   const [isOpenFormModifProjecteur,setIsOpenFormModifProjecteur]=useState(false);
+  const [isOpenFormModifScanner,setIsOpenFormModifScanner]=useState(false);
+  const [isOpenFormModifAutoComm,setIsOpenFormModifAutoComm]=useState(false);
+  const [isOpenFormModifTelephone,setIsOpenFormModifTelephone]=useState(false);
+  const [isOpenFormModifAP,setIsOpenFormModifAP]=useState(false);
+  const [isOpenFormModifNAS,setIsOpenFormModifNAS]=useState(false);
+  const [isOpenFormModifKVM,setIsOpenFormModifKVM]=useState(false);
+  const [isOpenFormModifAntenne,setIsOpenFormModifAntenne]=useState(false);
+  
+
 
 
   const [isopenReaffectMateriel,setIsOpenReaffectMateriel]=useState(false)
@@ -82,21 +132,40 @@ export default function MaterielsPage(){
         setIsOpenFormNouvelOrdinateur(false);
         setIsOpenFormNouvelImprimante(false);
         setIsOpenFormNouvelOnduleur(false);
+        setIsOpenFormNouvelPareFeu(false)
         setIsOpenFormNouvelCopieur(false);
         setIsOpenFormNouvelRouteur(false);
         setIsOpenFormNouvelSwitch(false);
         setIsOpenFormNouvelControleur(false);
         setIsOpenFormNouvelProjecteur(false);
+        setIsOpenFormNouvelScanner(false);
+        setIsOpenFormNouvelAutoComm(false);
+        setIsOpenFormNouvelTelephone(false);
+        setIsOpenFormNouvelAP(false);
+        setIsOpenFormNouvelNAS(false);
+        setIsOpenFormNouvelKVM(false);
+        setIsOpenFormNouvelAntenne(false)
+
+
 
 
         setIsOpenFormModifOrdinateur(false);
         setIsOpenFormModifImprimante(false);
         setIsOpenFormModifCopieur(false);
         setIsOpenFormModifOnduleur(false);
+        setIsOpenFormModifPareFeu(false)
         setIsOpenFormModifRouteur(false);
         setIsOpenFormModifSwitch(false);
         setIsOpenFormModifControleur(false);
         setIsOpenFormModifProjecteur(false);
+        setIsOpenFormModifScanner(false);
+        setIsOpenFormModifAutoComm(false);
+        setIsOpenFormModifTelephone(false);
+        setIsOpenFormModifAP(false);
+        setIsOpenFormModifNAS(false);
+        setIsOpenFormModifKVM(false);
+        setIsOpenFormModifAntenne(false);
+
 
 
 
@@ -107,7 +176,6 @@ export default function MaterielsPage(){
     setOpenDropdownId(false)
     setIdToDelete(idMateriel)
     setIsOpenModalSuppr(true);
-    console.log(idTodDelete);
     
   };
   const openModalModifMateriel=(materiel)=>{
@@ -120,11 +188,18 @@ export default function MaterielsPage(){
     case "Imprimante":
         setIsOpenFormModifImprimante(true);
         break;
+    case "Scanner":
+        setIsOpenFormModifScanner(true);
+        break;
+        
     case "Copieur":
         setIsOpenFormModifCopieur(true);
         break;
     case "Onduleur":
         setIsOpenFormModifOnduleur(true);
+        break;
+    case "PareFeu":
+        setIsOpenFormModifPareFeu(true);
         break;
     case "Routeur":
         setIsOpenFormModifRouteur(true);
@@ -138,7 +213,24 @@ export default function MaterielsPage(){
     case "Projecteur":
         setIsOpenFormModifProjecteur(true);
         break;
-        
+    case "AutoComm":
+        setIsOpenFormModifAutoComm(true);
+        break;
+    case "Telephone":
+        setIsOpenFormModifTelephone(true);
+        break;
+    case "AP":
+        setIsOpenFormModifAP(true);
+        break;
+    case "NAS":
+        setIsOpenFormModifNAS(true);
+        break;
+    case "KVM":
+        setIsOpenFormModifKVM(true);
+        break;
+    case "Antenne":
+        setIsOpenFormModifAntenne(true);
+        break;
         
     
   }
@@ -205,11 +297,17 @@ export default function MaterielsPage(){
         case "imprimante":
           setIsOpenFormNouvelImprimante(true);
           break;
+        case "scanner":
+          setIsOpenFormNouvelScanner(true);
+          break;
           case "copieur":
             setIsOpenFormNouvelCopieur(true);
             break;
         case "onduleur":
           setIsOpenFormNouvelOnduleur(true);
+          break;
+        case "pareFeu":
+          setIsOpenFormNouvelPareFeu(true);
           break;
         case "routeur":
           setIsOpenFormNouvelRouteur(true);
@@ -222,6 +320,24 @@ export default function MaterielsPage(){
           break;
         case "projecteur":
           setIsOpenFormNouvelProjecteur(true);
+          break;
+        case "autoComm":
+          setIsOpenFormNouvelAutoComm(true);
+          break;
+        case "telephone":
+          setIsOpenFormNouvelTelephone(true);
+          break;
+        case "AP":
+          setIsOpenFormNouvelAP(true);
+          break;
+        case "NAS":
+          setIsOpenFormNouvelNAS(true);
+          break;
+        case "KVM":
+          setIsOpenFormNouvelKVM(true);
+          break;
+        case "antenne":
+          setIsOpenFormNouvelAntenne(true);
           break;
 
 
@@ -287,36 +403,62 @@ export default function MaterielsPage(){
             const [isOpenDetailImprimante,setIsOpenDetailImprimante]=useState(false);
             const [isOpenDetailCopieur,setIsOpenDetailCopieur]=useState(false);
             const [isOpenDetailOnduleur,setIsOpenDetailOnduleur]=useState(false);
+            const [isOpenDetailPareFeu,setIsOpenDetailPareFeu]=useState(false);
             const [isOpenDetailRouteur,setIsOpenDetailRouteur]=useState(false);
             const [isOpenDetailSwitch,setIsOpenDetailSwitch]=useState(false);
             const [isOpenDetailControleur,setIsOpenDetailControleur]=useState(false);
             const [isOpenDetailProjecteur,setIsOpenDetailProjecteur]=useState(false);
+            const [isOpenDetailScanner,setIsOpenDetailScanner]=useState(false);
+            const [isOpenDetailAutoComm,setIsOpenDetailAutoComm]=useState(false);
+            const [isOpenDetailTelephone,setIsOpenDetailTelephone]=useState(false);
+            const [isOpenDetailAP,setIsOpenDetailAP]=useState(false);
+            const [isOpenDetailNAS,setIsOpenDetailNAS]=useState(false);
+            const [isOpenDetailKVM,setIsOpenDetailKVM]=useState(false);
+            const [isOpenDetailAntenne,setIsOpenDetailAntenne]=useState(false);
+
+
+
+
+
+
+
+
             
             const handleClose=()=>{
                 setIsOpenDetailOrdinateur(false);
                 setIsOpenDetailImprimante(false);
                 setIsOpenDetailCopieur(false);
                 setIsOpenDetailOnduleur(false);
+                setIsOpenDetailPareFeu(false)
                 setIsOpenDetailRouteur(false);
                 setIsOpenDetailSwitch(false);
                 setIsOpenDetailControleur(false);
                 setIsOpenDetailProjecteur(false);
+                setIsOpenDetailScanner(false);
+                setIsOpenDetailAutoComm(false);
+                setIsOpenDetailTelephone(false);
+                setIsOpenDetailAP(false);
+                setIsOpenDetailNAS(false);
+                setIsOpenDetailKVM(false);
+                setIsOpenDetailAntenne(false)
 
 
-                setIsOpenFormModifOrdinateur(false);
-                setIsOpenFormModifImprimante(false);
-                setIsOpenFormModifCopieur(false);
-                setIsOpenFormModifOnduleur(false);
-                setIsOpenFormModifRouteur(false);
-                setIsOpenFormModifSwitch(false);
-                setIsOpenFormNouvelControleur(false);
-                setIsOpenFormModifProjecteur(false);
-
+                // setIsOpenFormModifOrdinateur(false);
+                // setIsOpenFormModifImprimante(false);
+                // setIsOpenFormModifCopieur(false);
+                // setIsOpenFormModifOnduleur(false);
+                // setIsOpenFormModifRouteur(false);
+                // setIsOpenFormModifSwitch(false);
+                // setIsOpenFormNouvelControleur(false);
+                // setIsOpenFormModifProjecteur(false);
+                // setIsOpenFormModifScanner(false);
+                handleCloseFormMateriels();
+                
                 setIsOpenReaffectMateriel(false);
             }
             
             const openDetailMaterial=(materiel)=>{
-              //console.log(materiel);
+              console.log(materiel.__t);
               
                  setOpenDropdownId(false);
                 setSelectedMateriel(materiel);
@@ -329,11 +471,17 @@ export default function MaterielsPage(){
                     case "Imprimante":
                         setIsOpenDetailImprimante(true);                        
                         break;
+                    case "Scanner":
+                        setIsOpenDetailScanner(true);                        
+                        break;
                     case "Copieur":
                         setIsOpenDetailCopieur(true);                        
                         break;
                     case "Onduleur":
                         setIsOpenDetailOnduleur(true);                        
+                        break;
+                    case "PareFeu":
+                        setIsOpenDetailPareFeu(true);                        
                         break;
                     case "Routeur":
                         setIsOpenDetailRouteur(true);                        
@@ -347,6 +495,24 @@ export default function MaterielsPage(){
                     case "Projecteur":
                         setIsOpenDetailProjecteur(true);                        
                         break;
+                    case "AutoComm":
+                        setIsOpenDetailAutoComm(true);                        
+                        break;
+                    case "Telephone":
+                        setIsOpenDetailTelephone(true);                        
+                        break;
+                    case "NAS":
+                        setIsOpenDetailNAS(true);                        
+                        break;
+                    case "AP":
+                        setIsOpenDetailAP(true);                        
+                        break;
+                    case "KVM":
+                        setIsOpenDetailKVM(true);                        
+                        break;
+                    case "Antenne":
+                        setIsOpenDetailAntenne(true);                        
+                        break;
                 }
             }
 
@@ -357,11 +523,11 @@ export default function MaterielsPage(){
            <div className="relative  p-4 max-w-full overflow-hidden ">
         <ConfirmSuppression isOpen={isOpenModalSuppr} onClose={handleCloseModalSuppr}  isDeleting={isDeleting} onConfirm={handleConfirmDelete} />
 
-                <div className="z-50 fixed right-4 top-24 inline-block text-left text-sm">
+                <div className="absolute right-4 top-7 inline-block text-left text-sm ">
       {/* Bouton principal */}
       <button
         onClick={() => setOpenDropDownMaterials(!openDropDownMaterials)}
-        className="px-2 py-2 font-bold rounded-sm bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow hover:opacity-90"
+        className="px-2 py-2 font-bold rounded-sm bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow hover:opacity-90 "
       >
         + Ajouter
       </button>
@@ -369,7 +535,7 @@ export default function MaterielsPage(){
       {/* Menu déroulant */}
       {openDropDownMaterials && (
         <div className="absolute right-0 mt-1 w-32  bg-gray-50  rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-          <ul className="py-2">
+          <ul className="py-4 max-h-96 overflow-y-scroll z-50">
             <li>
               <button
                 onClick={() => handleSelectNouveauMateriel("ordinateur")}
@@ -384,6 +550,14 @@ export default function MaterielsPage(){
                 className="w-full text-left px-4 py-2 hover:bg-gray-300"
               >
                 Imprimante
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => handleSelectNouveauMateriel("scanner")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                Scanner
               </button>
             </li>
             <li>
@@ -408,6 +582,12 @@ export default function MaterielsPage(){
                 Routeur
               </button>
               <button
+                onClick={() => handleSelectNouveauMateriel("pareFeu")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                Pare Feu
+              </button>
+              <button
                 onClick={() => handleSelectNouveauMateriel("switch")}
                 className="w-full text-left px-4 py-2 hover:bg-gray-300"
               >
@@ -426,6 +606,43 @@ export default function MaterielsPage(){
                 Projecteur
               </button>
 
+              <button
+                onClick={() => handleSelectNouveauMateriel("autoComm")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                Auto Comm
+              </button>
+              <button
+                onClick={() => handleSelectNouveauMateriel("telephone")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                Téléphone
+              </button>
+              <button
+                onClick={() => handleSelectNouveauMateriel("NAS")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                NAS
+              </button>
+              <button
+                onClick={() => handleSelectNouveauMateriel("AP")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                AP
+              </button>
+              <button
+                onClick={() => handleSelectNouveauMateriel("KVM")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                KVM
+              </button>
+              <button
+                onClick={() => handleSelectNouveauMateriel("antenne")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-300"
+              >
+                Antenne
+              </button>
+
               
             </li>
           </ul>
@@ -435,10 +652,19 @@ export default function MaterielsPage(){
     <NouvelImprimante isOpenFormNouvelImprimante={isOpenFormNouvelImprimante} closeFormNouvelImprimante={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelCopieur isOpenFormNouvelCopieur={isOpenFormNouvelCopieur} closeFormNouvelCopieur={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelOnduleur isOpenFormNouvelOnduleur={isOpenFormNouvelOnduleur} closeFormNouvelOnduleur={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelPareFeu isOpenFormNouvelPareFeu={isOpenFormNouvelPareFeu} closeFormNouvelPareFeu={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelRouteur isOpenFormNouvelRouteur={isOpenFormNouvelRouteur} closeFormNouvelRouteur={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelSwitch isOpenFormNouvelSwitch={isOpenFormNouvelSwitch} closeFormNouvelSwitch={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelControleur isOpenFormNouvelControleur={isOpenFormNouvelControleur} closeFormNouvelControleur={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
     <NouvelProjecteur isOpenFormNouvelProjecteur={isOpenFormNouvelProjecteur} closeFormNouvelProjecteur={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelScanner isOpenFormNouvelScanner={isOpenFormNouvelScanner} closeFormNouvelScanner={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelAutoComm isOpenFormNouvelAutoComm={isOpenFormNouvelAutoComm} closeFormNouvelAutoComm={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelTelephone isOpenFormNouvelTelephone={isOpenFormNouvelTelephone} closeFormNouvelTelephone={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelNAS isOpenFormNouvelNAS={isOpenFormNouvelNAS} closeFormNouvelNAS={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelAP isOpenFormNouvelAP={isOpenFormNouvelAP} closeFormNouvelAP={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelKVM isOpenFormNouvelKVM={isOpenFormNouvelKVM} closeFormNouvelKVM={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+    <NouvelAntenne isOpenFormNouvelAntenne={isOpenFormNouvelAntenne} closeFormNouvelAntenne={()=>handleCloseFormMateriels()} onSuccess={(message)=>handleSuccess(message)}/>
+
     </div>
 
                 <ItemsParPageOptions
@@ -468,15 +694,15 @@ export default function MaterielsPage(){
                     <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse ">
                         <thead className="bg-gray-200">
                             <tr>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Type</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Marque</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Modele</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No Serie</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Propriétaire</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Site</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Etat</th>
-                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Action</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">No</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Type</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Marque</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Modele</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">No Serie</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Propriétaire</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Site</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Etat</th>
+                                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Action</th>
                             </tr>
                         </thead>
                         
@@ -507,8 +733,8 @@ export default function MaterielsPage(){
                                             </div>
 
                                             {openDropdownId === item._id && (
-                                            <div className=" absolute mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-30">
-                                                <div className="py-1 z-40">
+                                            <div className=" fixed mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                                <div className="py-1 z-50">
                                                 <button
                                                     onClick={()=>openDetailMaterial(item)}
                                                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
@@ -667,20 +893,37 @@ export default function MaterielsPage(){
            <DetailModalImprimante isOpenModalInfo={isOpenDetailImprimante} onCloseModalInfo={handleClose} imprimante={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
            <DetailModalCopieur isOpenModalInfo={isOpenDetailCopieur} onCloseModalInfo={handleClose} copieur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
            <DetailModalOnduleur isOpenModalInfo={isOpenDetailOnduleur} onCloseModalInfo={handleClose} onduleur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalPareFeu isOpenModalInfo={isOpenDetailPareFeu} onCloseModalInfo={handleClose} pareFeu={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
            <DetailModalRouteur isOpenModalInfo={isOpenDetailRouteur} onCloseModalInfo={handleClose} routeur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
-            <DetailModalSwitch isOpenModalInfo={isOpenDetailSwitch} onCloseModalInfo={handleClose} switchs={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalSwitch isOpenModalInfo={isOpenDetailSwitch} onCloseModalInfo={handleClose} switchs={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
            <DetailModalControleur isOpenModalInfo={isOpenDetailControleur} onCloseModalInfo={handleClose} controleur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
            <DetailModalProjecteur isOpenModalInfo={isOpenDetailProjecteur} onCloseModalInfo={handleClose} projecteur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalScanner isOpenModalInfo={isOpenDetailScanner} onCloseModalInfo={handleClose} scanner={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalAutoComm isOpenModalInfo={isOpenDetailAutoComm} onCloseModalInfo={handleClose} autoComm={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalTelephone isOpenModalInfo={isOpenDetailTelephone} onCloseModalInfo={handleClose} telephone={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalNAS isOpenModalInfo={isOpenDetailNAS} onCloseModalInfo={handleClose} nas={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalAP isOpenModalInfo={isOpenDetailAP} onCloseModalInfo={handleClose} ap={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalKVM isOpenModalInfo={isOpenDetailKVM} onCloseModalInfo={handleClose} kvm={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           <DetailModalAntenne isOpenModalInfo={isOpenDetailAntenne} onCloseModalInfo={handleClose} antenne={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
+           
            
            <ModifOrdinateur isOpenFormModifOrdinateur={isOpenFormModifOrdinateur} closeFormModifOrdinateur={handleClose} ordinateur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifImprimante isOpenFormModifImprimante={isOpenFormModifImprimante} closeFormModifImprimante={handleClose} imprimante={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifCopieur isOpenFormModifCopieur={isOpenFormModifCopieur} closeFormModifCopieur={handleClose} copieur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifOnduleur isOpenFormModifOnduleur={isOpenFormModifOnduleur} closeFormModifOnduleur={handleClose} onduleur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifPareFeu isOpenFormModifPareFeu={isOpenFormModifPareFeu} closeFormModifPareFeu={handleClose} pareFeu={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifRouteur isOpenFormModifRouteur={isOpenFormModifRouteur} closeFormModifRouteur={handleClose} routeur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifSwitch isOpenFormModifSwitch={isOpenFormModifSwitch} closeFormModifSwitch={handleClose} switchs={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifControleur isOpenFormModifControleur={isOpenFormModifControleur} closeFormModifControleur={handleClose} controleur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
            <ModifProjecteur isOpenFormModifProjecteur={isOpenFormModifProjecteur} closeFormModifProjecteur={handleClose} projecteur={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
-           
+           <ModifScanner isOpenFormModifScanner={isOpenFormModifScanner} closeFormModifScanner={handleClose} scanner={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifAutoComm isOpenFormModifAutoComm={isOpenFormModifAutoComm} closeFormModifAutoComm={handleClose} autoComm={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifTelephone isOpenFormModifTelephone={isOpenFormModifTelephone} closeFormModifTelephone={handleClose} telephone={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifNAS isOpenFormModifNAS={isOpenFormModifNAS} closeFormModifNAS={handleClose} nas={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifAP isOpenFormModifAP={isOpenFormModifAP} closeFormModifAP={handleClose} ap={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifKVM isOpenFormModifKVM={isOpenFormModifKVM} closeFormModifKVM={handleClose} kvm={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+           <ModifAntenne isOpenFormModifAntenne={isOpenFormModifAntenne} closeFormModifKVM={handleClose} antenne={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>           
+
            <ReaffectMateriel isOpenModalInfo={isopenReaffectMateriel} onCloseModalInfo={handleClose} materiel={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
         </>
     )

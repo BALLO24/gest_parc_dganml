@@ -87,14 +87,24 @@ const ModifOrdinateur = ({ isOpenFormModifOrdinateur, closeFormModifOrdinateur, 
         load();
       }, []);
 
+    const formatDateInput = (value) => {
+    if (!value) return "Non spécifié !"
+    const [year, month, day] = value.split("-");
+    return `${day}/${month}/${year}`;
+  };
+    
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { _id, ...dataForm } = Object.fromEntries(formData.entries());
+    const { _id,dateAchatNonFormatted ,...dataForm } = Object.fromEntries(formData.entries());
+    const dateAchat=formatDateInput(dateAchatNonFormatted);
+    const finalData={dateAchat,...dataForm}
+
     try {
       setIsSubmetting(true);
-      await API.modifMateriel(_id, dataForm);
+      await API.modifMateriel(_id, finalData);
       onSuccess("Ordinateur modifié avec succès !");
       setIsSubmetting(false);
     } catch (err) {
@@ -180,7 +190,7 @@ const ModifOrdinateur = ({ isOpenFormModifOrdinateur, closeFormModifOrdinateur, 
             ))}
           </FloatingSelect>
 
-          <FloatingInput label="Date d’acquisition" name="dateAcquisition" type="date" defaultValue={ordinateur.dateAchat} required />
+          <FloatingInput label="Date d’acquisition" name="dateAchatNonFormatted" type="date" defaultValue={ordinateur.dateAchat} />
 
           {/* Etat */}
           <FloatingSelect label="État" name="etat" required>

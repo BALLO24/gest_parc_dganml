@@ -92,7 +92,7 @@ const NouvelCopieur = ({
     }, []);
   
     const formatDateInput = (value) => {
-      if (!value) return "";
+      if (!value) return "Non spécifié !";
       const [year, month, day] = value.split("-");
       return `${day}/${month}/${year}`;
     };
@@ -109,7 +109,6 @@ const NouvelCopieur = ({
     const dateAffect=new Date().toLocaleDateString("fr-FR");
     const finalData={dateAchat,dateAffect,...data};
 
-    console.log(finalData);
     
     
     
@@ -158,7 +157,7 @@ const NouvelCopieur = ({
           <FloatingInput label="Modèle" name="modele" required />
           <FloatingInput label="N° série" name="noSerie" required />
 
-          <FloatingInput label="Date acquisition" type="date" name="dateAchat" required />
+          <FloatingInput label="Date acquisition" type="date" name="dateAchatNonFormatted"/>
 
           <FloatingSelect label="État" name="etat" required>
             <option value="">---</option>
@@ -166,6 +165,8 @@ const NouvelCopieur = ({
             <option value="Bon">Bon</option>
             <option value="Moyen">Moyen</option>
             <option value="Mauvais">Mauvais</option>
+            <option value="Vétuste">Vétuste</option>
+
           </FloatingSelect>
 
           <FloatingSelect label="Couleur" name="couleur" required>

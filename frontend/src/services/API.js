@@ -4,7 +4,7 @@ export default {
 
   async login(data){
     try{
-          await new Promise(resolve=>setTimeout(resolve,2000));
+          await new Promise(resolve=>setTimeout(resolve,500));
           const res=await fetch(`${API_URL}/utilisateur/login`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
@@ -95,7 +95,7 @@ async me() {
 //Ajouter un nouvel utlisateur
     async addUser(userData){
       try{
-          await new Promise(resolve=>setTimeout(resolve,2000));
+          await new Promise(resolve=>setTimeout(resolve,1200));
           await fetch(`${API_URL}/utilisateur/register`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
@@ -168,7 +168,7 @@ async me() {
 
       async addMateriel(materielData){
       try{
-          await new Promise(resolve=>setTimeout(resolve,2000));
+          await new Promise(resolve=>setTimeout(resolve,1000));
           await fetch(`${API_URL}/materiel`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
@@ -195,7 +195,7 @@ async me() {
 
         async modifMateriel(idToModif,newMateriel){
     try{
-        await new Promise(resolve=>setTimeout(resolve,2000));
+        await new Promise(resolve=>setTimeout(resolve,1800));
         await fetch(`${API_URL}/materiel/${idToModif}`,{
         method:"PATCH",
         headers: { "Content-Type": "application/json" },
@@ -210,7 +210,7 @@ async me() {
   },
       async reaffectMateriel(idTMateriel,nouvelUtilisateur){
     try{
-        await new Promise(resolve=>setTimeout(resolve,2000));
+        await new Promise(resolve=>setTimeout(resolve,1200));
         await fetch(`${API_URL}/materiel/${idTMateriel}/reaffect`,{
         method:"PATCH",
         headers: { "Content-Type": "application/json" },
@@ -227,7 +227,7 @@ async me() {
 
       async addSite(siteData){
       try{
-          await new Promise(resolve=>setTimeout(resolve,2000));
+          await new Promise(resolve=>setTimeout(resolve,1800));
           await fetch(`${API_URL}/site`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
@@ -275,7 +275,7 @@ async me() {
 
       async addAgent(agentData){
       try{
-          await new Promise(resolve=>setTimeout(resolve,2000));
+          await new Promise(resolve=>setTimeout(resolve,1800));
           await fetch(`${API_URL}/agent`,{
           method:"POST",
           headers: { "Content-Type": "application/json" },
