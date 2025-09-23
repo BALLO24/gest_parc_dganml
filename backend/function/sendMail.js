@@ -1,59 +1,52 @@
-require('dotenv').config();
+require("dotenv").config();
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-const path=require("path")
 
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
-const USER_EMAIL = process.env.EMAIL_USER;
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,           // 465 pour SSL/TLS
+  secure: true,        // true = SSL
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  // optional: increase timeouts if nécessaire
+  // connectionTimeout: 10000,
+  // greetingTimeout: 5000,
+});
 
-const oAuth2Client = new google.auth.OAuth2(
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REDIRECT_URI
-);
-
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+// Vérifie la connexion au démarrage (log utile en dev)
+async function verifyTransporter() {
+  try {
+    await transporter.verify();
+    console.log("✅ Transporter SMTP prêt (Gmail App Password).");
+  } catch (err) {
+    console.error("❌ Échec verification transporter:", err);
+  }
+}
+verifyTransporter();
 
 async function sendMail(objet,message,destinataire) {
   try {
-    const accessTokenObj = await oAuth2Client.getAccessToken();
-    const accessToken = accessTokenObj?.token || accessTokenObj;
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        type: "OAuth2",
-        user: USER_EMAIL,
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET,
-        refreshToken: REFRESH_TOKEN,
-        accessToken,
-      },
-    });
-
-    const info = await transporter.sendMail({
-      from: `"Cellule Informatique DGANML" <${USER_EMAIL}>`,
+    const mailOptions = {
+    from: `"Cellule Informatique DGANML" <${process.env.EMAIL_USER}>`,
       to: destinataire,
       subject:objet,
-      //text: "Ceci est un test via OAuth2",
-      //html: "<b>Ceci est un test via OAuth2 test test</b>",
       html:message,
       attachments: [{
       filename: "logo_asecna.png",
       path:__dirname + "/../public/logo_asecna.png", // chemin vers ton logo
-     // path: path.join(__dirname, "public", "logo_asecna.png"),
       cid: "logoasecna" // identifiant à utiliser dans <img src="cid:...">
   }]
-      
-    });
+    };
 
-    console.log("✅ Email envoyé:", info.messageId);
-    
-  } catch (err) {
-    console.error("❌ Erreur d'envoi:", err);
+    const info = await transporter.sendMail(mailOptions);
+    // info.messageId, envelope, accepted, rejected, response...
+    return { success: true, info };
+  } catch (error) {
+    // Log utile pour debug côté serveur
+    console.error("Erreur envoi mail:", error);
+    // Standardiser la réponse d'erreur pour le reste de ton app
+    return { success: false, error: error.message || error };
   }
 }
 

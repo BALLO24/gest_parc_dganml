@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import ItemsParPageOptions from "../components/ItemsParPage";
-import NouveauTypeMateriel from "../components/NouveauTypeMateriel";
+import NouveauGfu from "../components/NouveauGfu";
+import ReaffectGFU from "../components/ReaffectGFU";
 import SearchBar from "../components/SearchBar";
 import { AiFillDelete } from "react-icons/ai";
 import ConfirmSuppression from "../components/CofirmSuppression";
 import ToastSuccess from "../components/ToastSuccess";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import { LiaExchangeAltSolid } from "react-icons/lia";
+
 
 import API from "../services/API";
-//import { SiTestin, SiTestinglibrary } from "react-icons/si";
 
-export default function TypesMaterielsPage() {
+export default function GFUPage() {
   // données
-  const [typesMateriels, setTypesMateriels] = useState([]);
+  const [numsGfu, setNumsGfu] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
   // pagination / recherche / UI
@@ -20,7 +22,8 @@ export default function TypesMaterielsPage() {
   const [itemsPerPage, setItemPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
     
-const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(false);
+const [isOpenFormNouveauGfu,setIsOpenFormNouveauGfu]=useState(false);
+  const [isopenReaffectGfu,setIsOpenReaffectGfu]=useState(false)
 
 
   // modals / toasts
@@ -29,6 +32,7 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
   const [idTodDelete,setIdToDelete]=useState(null);
   const [isDeleting,setIsDeleting]=useState(false)
   const [message,setMessage]=useState("Opération éffectuée avec succès");
+  const [selectedMateriel,setSelectedMateriel]=useState(null);
 
   const navigate = useNavigate();
 
@@ -36,33 +40,39 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await API.getTypesMateriels();
-        setTypesMateriels(res.typesMateriels || []);
+        const res = await API.getNumGfu();
+        setNumsGfu(res.numsGfu || []);
       } catch (err) {
-        console.error("Erreur chargement des types de materiels:", err);
-        setTypesMateriels([]);
+        console.error("Erreur chargement des numéros GFU : ", err);
+        setNumsGfu([]);
       }
     };
     load();
   }, []);
+        const [openDropdownId, setOpenDropdownId] = useState(null);
+
+
+        const toggleDropdown = (id) => {
+          setOpenDropdownId(openDropdownId === id ? null : id);
+        };
 
   // --- filtrage : recalculer quand searchTerm OU utilisateurs changent ---
   useEffect(() => {
     const term = (searchTerm || "").trim().toLowerCase();
 
     if (!term) {
-      setFilteredData(typesMateriels);
+      setFilteredData(numsGfu);
       setCurrentPage(1);
       return;
     }
 
-    const filtered = typesMateriels.filter((item) =>
+    const filtered = numsGfu.filter((item) =>
       Object.values(item).some((val) => (val ?? "").toString().toLowerCase().includes(term))
     );
 
     setFilteredData(filtered);
     setCurrentPage(1);
-  }, [searchTerm, typesMateriels]);
+  }, [searchTerm, numsGfu]);
 
   // --- pagination calculs ---
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -77,20 +87,21 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
 
   // --- handlers UI ---
   const handleClose = () => {
-    setisOpenFormNouveauTypeMateriel(false);
-    setIsOpenModalSuppr(false)
+    setIsOpenFormNouveauGfu(false);
+    setIsOpenModalSuppr(false);
+    setIsOpenReaffectGfu(false)
   };
- const openFormNouveauTypeMateriel = () => setisOpenFormNouveauTypeMateriel(true);
+ const openFormNouveauGfu = () => setIsOpenFormNouveauGfu(true);
   const handleSuccess = async () => {
     handleClose();
-    navigate("/app/types-materiels");
+    navigate("/app/gfu");
      try {
-    const res = await API.getTypesMateriels();
-    setTypesMateriels(res.typesMateriels || []);
+    const res = await API.getNumGfu();
+    setNumsGfu(res.numsGfu || []);
   } catch (err) {
-    console.error("Erreur rechargement de sites:", err);
+    console.error("Erreur rechargement de liste de GFU :", err);
   }
-    setMessage("Type de matériel créé avec succès !")
+    setMessage("Numéro GFU créé avec succès !")
     setShowSuccesToast(true);
     setTimeout(() => setShowSuccesToast(false), 4000);
   };
@@ -106,12 +117,12 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
    if(!idTodDelete) return ;
    try {
     setIsDeleting(true)
-    await new Promise(resolve=>setTimeout(resolve,2000));
+    await new Promise(resolve=>setTimeout(resolve,1200));
     handleCloseModalSuppr();
-    await API.deleteTypeMateriel(idTodDelete);
-    const res=await API.getTypesMateriels();
-    setTypesMateriels(res.typesMateriels || []);
-    setMessage("Type de materiel supprimé avec succès !");
+    await API.deleteNumGfu(idTodDelete);
+    const res=await API.getNumGfu();
+    setNumsGfu(res.numsGfu || []);
+    setMessage("Numéro GFU supprimé avec succès !");
     setShowSuccesToast(true);
     setTimeout(() => setShowSuccesToast(false), 4000);
     setIsDeleting(false)
@@ -124,6 +135,14 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
    }
     
   }
+      const openModalReaffectGfu=(item)=>{
+      setOpenDropdownId(false)
+      setIsOpenReaffectGfu(true);
+      setSelectedMateriel(item);
+      console.log(selectedMateriel);
+      
+    }
+
   const handleCloseModalSuppr = () => setIsOpenModalSuppr(false);
 
   return (
@@ -149,7 +168,7 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
         />
 
         <button
-          onClick={() => openFormNouveauTypeMateriel()}
+          onClick={() => openFormNouveauGfu()}
           className="px-2 py-2 absolute right-10 top-4 font-bold rounded-sm bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow hover:opacity-90"
         >
           + Ajouter
@@ -161,7 +180,9 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
             <thead className="bg-gray-200">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Nom</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Numéro</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Propriétaire</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Site</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Action</th>
               </tr>
             </thead>
@@ -170,14 +191,44 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
               {currentItems.map((item, idx) => (
                 <tr key={item._id ?? idx}>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{indexOfFirstItem + idx + 1}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.nom}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.numero}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.userActuel.prenom} {" "} {item.userActuel.nom} </td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.userActuel.site.nom} </td>
                   <td className="px-6 py-2 whitespace-nowrap text-gray-600">
-                    <button
-                      onClick={() => openModalSuppr(item._id)}
-                      className="flex items-center px-2 py-2 text-sm font-bold bg-gradient-to-r from-red-400 via-red-500 to-red-800 shadow-lg text-white rounded-md hover:bg-gray-100  text-center"
-                    >
-                      <AiFillDelete className="mr-1 text-xl " />Supprimer
-                    </button>
+                    <div className="relative inline-block text-left">
+                        <div>
+                            <button
+                                type="button"
+                                className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                onClick={() => toggleDropdown(item._id)}
+                            >
+                                Actions
+                                <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        {openDropdownId === item._id && (
+                        <div className=" fixed mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div className="py-1 z-50">
+                            <Link to=""
+                                onClick={() => openModalReaffectGfu(item)}
+                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                            >
+                            <LiaExchangeAltSolid  className="mr-1 text-xl"/>Reaffectation
+                            </Link>
+                            <Link to=""
+                                // onClick={() => handleAction(item.id, 'Modifier')}
+                                onClick={()=>openModalSuppr(item._id)}
+                                className="flex items-center px-4 py-2 text-sm text-red-500 hover:bg-gray-100 w-full text-left"
+                            >
+                            <AiFillDelete className="mr-1 text-xl "/>Supprimer
+                            </Link>
+                            </div>
+                        </div>
+                            )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -219,12 +270,9 @@ const [isOpenFormNouveauTypeMateriel,setisOpenFormNouveauTypeMateriel]=useState(
             Suivant
           </button>
         </div>
-{/* 
-        {isOpenFormNouvelUtilisateur && (
-          <NouvelUtilisateur isOpenFormNouvelUtilisateur={isOpenFormNouvelUtilisateur} closeFormNouvelUtilisateur={handleClose} onSuccess={handleSuccess} />
-        )} */}
-        <NouveauTypeMateriel isOpenFormNouveauTypeMateriel={isOpenFormNouveauTypeMateriel} closeFormNouveauTypeMateriel={handleClose} onSuccess={handleSuccess}/>
+        <NouveauGfu isOpenFormNouveauGfu={isOpenFormNouveauGfu} closeFormNouveauGfu={handleClose} onSuccess={handleSuccess}/>
         {showSuccessToast && <ToastSuccess message={message} />}
+        <ReaffectGFU isOpenModalInfo={isopenReaffectGfu} onCloseModalInfo={handleClose} gfu={selectedMateriel} onSuccess={(message)=>handleSuccess(message)}/>
 
         <ConfirmSuppression isOpen={isOpenModalSuppr} onClose={handleClose}  isDeleting={isDeleting} onConfirm={handleConfirmDelete} />
       </div>

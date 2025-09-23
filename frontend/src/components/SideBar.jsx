@@ -9,6 +9,7 @@ import { FaUsers } from "react-icons/fa";
 import { PiBuildingApartmentFill } from "react-icons/pi";
 import { LuBookType } from "react-icons/lu";
 import { GrUserSettings } from "react-icons/gr";
+import { FaSimCard } from 'react-icons/fa6';
 
 
 const SideBar = () => {
@@ -55,6 +56,13 @@ const SideBar = () => {
                   <span className={`${isOpenSidebar===true ? "" : "hidden"}`}>Matériels</span>
                 </Link>
               </li>
+            <li>
+                <Link to="/app/gfu" className="flex items-center p-2 rounded-lg hover:bg-blue-700 transition-colors">
+               <FaSimCard className="mr-1" size={22}/>
+                  <span className={`${isOpenSidebar===true ? "" : "hidden"}`}>GFU</span>
+                </Link>
+              </li>
+              
             <li>
                 <Link to="/app/agents" className="flex items-center p-2 rounded-lg hover:bg-blue-700 transition-colors">
                <FaUsers className="mr-1" size={22}/>

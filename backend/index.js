@@ -10,6 +10,7 @@ const materielRoutes=require("./route/materiel.route");
 const siteRoutes=require("./route/site.route");
 const agentRoutes=require("./route/agent.route");
 const typeMaterielRoutes=require("./route/typeMateriel.route");
+const gfuRoutes=require('./route/gfu.route')
 const sendMail=require("./function/sendMail")
 
 const session=require("express-session");
@@ -72,17 +73,18 @@ app.use("/materiel",materielRoutes);
 app.use("/site",siteRoutes);
 app.use("/agent",agentRoutes);
 app.use("/type-materiel",typeMaterielRoutes);
-app.post("/mail",async (req,res)=>{
-    try{
-        await sendMail();
-        res.status(200).json({message:"Mail envoyé avec succès !"})
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).json({message:"Probleme d'envoi de mail"})
+app.use("/gfu",gfuRoutes);
+// app.post("/mail",async (req,res)=>{
+//     try{
+//         await sendMail();
+//         res.status(200).json({message:"Mail envoyé avec succès !"})
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(400).json({message:"Probleme d'envoi de mail"})
         
-    }
-})
+//     }
+// })
 
 app.listen(PORT,"0.0.0.0",()=>console.log(`Le serveur express tourne sur le port ${PORT}`)
 );

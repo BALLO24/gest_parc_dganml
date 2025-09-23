@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginForm from './pages/LoginPage';
 import AppLayout from './components/AppLayout';
 import MaterielsPage from './pages/MaterielsPage';
+import GFUPage from './pages/GFUPage.jsx';
 import AgentsPage from './pages/AgentsPage.jsx';
 import SitesPage from './pages/SitesPage';
 import TypesMaterielsPage from './pages/TypesMaterielsPage';
@@ -34,6 +35,7 @@ function App() {
           >
             <Route index element={<Navigate to="materiels" />} />
             <Route path="materiels" element={<MaterielsPage />} />
+            <Route path="gfu" element={<GFUPage />} />
             <Route path="agents" element={<AgentsPage />} />
             <Route path="sites" element={<SitesPage />} />
             <Route path="types-materiels" element={<TypesMaterielsPage />} />

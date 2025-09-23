@@ -370,6 +370,73 @@ async me() {
     }
   },
 
+  //gfu
+
+        async getNumGfu() {
+    try {
+      const response = await fetch(`${API_URL}/gfu`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      // utiliser response.ok (200-299) ou checker 200
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Récuperation des numéros GFU a echoué ${response.status} - ${text}`);
+      }
+
+      const agents = await response.json(); // attendu
+      return agents; // retourne l'objet complet ou data.data selon préférence
+    } catch (err) {
+      console.error("API.getTypesAgents error:", err);
+      throw err;
+    }
+  },
+
+          async addNumGfu(gfuData){
+      try{
+          await new Promise(resolve=>setTimeout(resolve,1000));
+          await fetch(`${API_URL}/gfu`,{
+          method:"POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(gfuData)       
+          });
+      }
+      catch(err){
+        console.log(err);
+        
+        throw new Error(`Ajout du nouveau type de materiel a échoué : ${err}`);
+      }
+    },
+
+    async deleteNumGfu(idToDelete){
+    try{
+        await fetch(`${API_URL}/gfu/${idToDelete}`,{
+        method:"DELETE"
+      });
+    }
+    catch(err){
+      console.log(err);
+      
+    }
+  },
+
+      async reaffectGfu(idGfu,nouvelUtilisateur){
+    try{
+        await new Promise(resolve=>setTimeout(resolve,1200));
+        await fetch(`${API_URL}/gfu/${idGfu}/reaffect`,{
+        method:"PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nouvelUtilisateur),       
+
+      });
+    }
+    catch(err){
+      console.log(err);
+      
+    }
+  },
+
 
 
   
