@@ -15,7 +15,7 @@ module.exports.addAgent=async(req,res)=>{
 
 module.exports.getAllAgents=async(req,res)=>{
     try{
-        const agents=await Agent.find().populate("site")        
+        const agents=await Agent.find().populate("site").sort({nom:1})        
         res.status(200).json({agents,message:"Agents recupérés avec succès"})
         
     }

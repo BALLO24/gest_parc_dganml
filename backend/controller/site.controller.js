@@ -15,7 +15,7 @@ module.exports.addSite=async(req,res)=>{
 
 module.exports.getAllSites=async(req,res)=>{
     try{
-        const sites=await Site.find();
+        const sites=await Site.find().sort({nom:1});
         
         res.status(200).json({sites,message:"Sites recupérés avec succès"})
         

@@ -156,8 +156,8 @@ export default function UtilisateursPage() {
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">No</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Matricule</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Prénom</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Nom</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Prénom</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Telephone</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Email</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-50">Action</th>
@@ -169,8 +169,8 @@ export default function UtilisateursPage() {
                 <tr key={item._id ?? idx}>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{indexOfFirstItem + idx + 1}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.matricule}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600 uppercase">{item.nom}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.prenom}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.nom}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.telephone}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.email}</td>
                   <td className="px-6 py-2 whitespace-nowrap text-gray-600">

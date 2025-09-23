@@ -5,14 +5,14 @@ import { ImSpinner } from "react-icons/im";
 import { FiChevronDown } from "react-icons/fi";
 import API from "../services/API";
 
-const FloatingInput = ({ label, name, type = "text", required = false }) => (
+const FloatingInput = ({ label, name, type = "text", specialClass,required = false }) => (
   <div className="relative">
     <input
       name={name}
       type={type}
       placeholder=" "
       required={required}
-      className="peer block w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-0 sm:text-sm text-gray-700"
+      className={`${specialClass} peer block w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-0 sm:text-sm text-gray-700`}
     />
     <label className="absolute left-3 -top-2 z-10 px-1 text-xs text-gray-500 bg-white transition-all duration-150
       peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
@@ -117,13 +117,10 @@ const NouvelAgent = ({ isOpenFormNouvelAgent, closeFormNouvelAgent, onSuccess })
             ))}
           </FloatingSelect>
 
-          <FloatingInput label="Nom" name="nom" required />
+          <FloatingInput label="Nom" name="nom" required/>
           <FloatingInput label="Prénom" name="prenom" required />
           <FloatingInput label="Téléphone" name="telephone" required />
           <FloatingInput label="Email" name="email" type="email" required />
-          <FloatingInput label="Mot de passe" name="mot_de_passe" type="password" required />
-          <FloatingInput label="Confirmer mot de passe" name="confirm_mot_de_passe" type="password" required />
-
           <FloatingTextarea label="Autres informations" name="autres" />
         </div>
 
@@ -133,8 +130,7 @@ const NouvelAgent = ({ isOpenFormNouvelAgent, closeFormNouvelAgent, onSuccess })
             disabled={isSubmetting}
             className={`${isSubmetting ? "cursor-not-allowed opacity-80" : ""} px-4 py-2 rounded-md bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-white shadow`}
           >
-            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : null}
-            {isSubmetting ? "Ajout en cours..." : "Ajouter"}
+            {isSubmetting ? <ImSpinner className="animate-spin inline-block w-5 h-5 mr-2" /> : "Ajouter"}
           </button>
         </div>
       </form>
