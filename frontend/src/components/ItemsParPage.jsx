@@ -1,4 +1,4 @@
-export default function ItemsParPageOptions({value, onChange, options=[5,10,20,30,50,100],className=''}){
+export default function ItemsParPageOptions({value, onChange, options=[10,20,30,50,100],className=''}){
     return(
         <div className={`flex items-center space-x-2  ${className}`}>
             <label htmlFor="itemsPerPage" className="text-sm font-semibold text-gray-600">Affichage par page :</label>

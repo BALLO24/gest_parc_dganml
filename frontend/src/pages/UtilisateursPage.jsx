@@ -150,7 +150,7 @@ export default function UtilisateursPage() {
         </button>
 
         {/* Desktop-Version */}
-        <div className="hidden md:block">
+        <div className="hidden md:block h-screen">
           <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse">
             <thead className="bg-gray-200">
               <tr>

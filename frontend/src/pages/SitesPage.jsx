@@ -155,7 +155,7 @@ const [isOpenFormNouveauSite,setisOpenFormNouveauSite]=useState(false);
         </button>
 
         {/* Desktop-Version */}
-        <div className="hidden md:block overflow-y-auto max-h-96">
+        <div className="hidden md:block overflow-y-auto h-screen">
           <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse">
             <thead className="bg-gray-200">
               <tr>

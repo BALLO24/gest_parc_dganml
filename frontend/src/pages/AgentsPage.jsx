@@ -22,7 +22,7 @@ export default function AgentsPage() {
 
   // pagination / recherche / UI
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemPerPage] = useState(5);
+  const [itemsPerPage, setItemPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
     
 const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
@@ -43,7 +43,7 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
     const load = async () => {
       try {
         const res = await API.getAgents();
-        setAgents(res.agents || []);
+        setAgents(res.agents.sort((a, b) => a.matricule.localeCompare(b.matricule, "fr", { sensitivity: "base" })) || []);
       } catch (err) {
         console.error("Erreur chargement users:", err);
         setAgents([]);
@@ -60,22 +60,58 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
         }
 
   // --- filtrage : recalculer quand searchTerm OU utilisateurs changent ---
-  useEffect(() => {
-    const term = (searchTerm || "").trim().toLowerCase();
+  // useEffect(() => {
+  //   const term = (searchTerm || "").trim().toLowerCase();
 
-    if (!term) {
-      setFilteredData(agents);
-      setCurrentPage(1);
-      return;
+  //   if (!term) {
+  //     setFilteredData(agents);
+  //     setCurrentPage(1);
+  //     return;
+  //   }
+
+  //   const filtered = agents.filter((item) =>
+  //     Object.values(item).some((val) => (val ?? "").toString().toLowerCase().includes(term))
+  //   );
+
+  //   setFilteredData(filtered);
+  //   setCurrentPage(1);
+  // }, [searchTerm, agents]);
+
+  const extractStrings = (obj, seen = new WeakSet()) => {
+  if (obj == null) return "";
+  if (typeof obj === "string" || typeof obj === "number" || typeof obj === "boolean") {
+    return String(obj);
+  }
+  if (seen.has(obj)) return "";
+  if (typeof obj === "object") {
+    seen.add(obj);
+    if (Array.isArray(obj)) {
+      return obj.map(v => extractStrings(v, seen)).join(" ");
     }
+    return Object.values(obj).map(v => extractStrings(v, seen)).join(" ");
+  }
+  return "";
+};
 
-    const filtered = agents.filter((item) =>
-      Object.values(item).some((val) => (val ?? "").toString().toLowerCase().includes(term))
-    );
-
-    setFilteredData(filtered);
+useEffect(() => {
+  const term = (searchTerm || "").trim().toLowerCase();
+  if (!term) {
+    setFilteredData(agents);
     setCurrentPage(1);
-  }, [searchTerm, agents]);
+    return;
+  }
+
+  const filtered = agents.filter(item => {
+    const haystack = extractStrings(item).toLowerCase();
+    return haystack.includes(term);
+  });
+
+  setFilteredData(filtered);
+  console.log(filteredData);
+  
+  setCurrentPage(1);
+}, [searchTerm, agents]);
+
 
   // --- pagination calculs ---
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -164,7 +200,7 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
             setItemPerPage(value);
             setCurrentPage(1);
           }}
-          options={[5, 10, 20, 50, 100]}
+          options={[10, 20, 50, 100]}
           className=" w-full md:w-max-md"
         />
 
@@ -185,35 +221,35 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
         </button>
 
         {/* Desktop-Version */}
-        <div className="hidden md:block overflow-y-auto max-h-96">
+        <div className="hidden md:block overflow-y-auto h-screen">
           <table className="min-w-full divide-y divide-gray-200 overflow-hidden border-collapse ">
             <thead className="bg-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">No</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Matricule</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Nom</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Prénom</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Site</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Type de Site</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Téléphone</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Email</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Action</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">No</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Matricule</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Nom</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Prénom</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Site</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Type de Site</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Téléphone</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Email</th>
+                <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider sticky top-0 bg-gray-200 z-40">Action</th>
               </tr>
             </thead>
 
             <tbody className=" divide-y divide-gray-200 bg-white ">
               {currentItems.map((item, idx) => (
                 <tr key={item._id ?? idx}>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{indexOfFirstItem + idx + 1}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.matricule}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600 uppercase">{item.nom}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.prenom}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item?.site.nom || "-"}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600 capitalize ">{item.site?.typeSite || "-"}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.telephone}</td>
-                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-600">{item.email}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{indexOfFirstItem + idx + 1}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{item.matricule}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600 uppercase">{item.nom}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{item.prenom}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{item?.site.nom || "-"}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600 capitalize ">{item.site?.typeSite || "-"}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{item.telephone}</td>
+                  <td className="px-4  whitespace-nowrap text-sm text-gray-600">{item.email}</td>
                   
-                  <td className="px-6 py-2 whitespace-nowrap text-gray-600">
+                  <td className="px-6  whitespace-nowrap text-gray-600">
                     <div className="relative inline-block text-left">
                     <div>
                         <button
@@ -235,7 +271,7 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
                       <AiFillDelete className="mr-1 text-xl " />Supprimer
                     </button> */}
                     {openDropdownId === item._id && (
-                    <div className=" absolute mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                    <div className=" fixed mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                         <div className="py-1 z-40">
                         <button onClick={()=>openListeMaterielsAgent(item._id)} 
                             className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
@@ -263,8 +299,6 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
               ))}
             </tbody>
           </table>
-        </div>
-
         {/* Pagination */}
         <div className="flex flex-center justify-between mt-4 mx-4 ">
           <div className="text-sm text-gray-700 font-semibold">
@@ -299,6 +333,8 @@ const [isOpenFormNouvelAgent,setisOpenFormNouvelAgent]=useState(false);
             Suivant
           </button>
         </div>
+        </div>
+
 {/* 
         {isOpenFormNouvelUtilisateur && (
           <NouvelUtilisateur isOpenFormNouvelUtilisateur={isOpenFormNouvelUtilisateur} closeFormNouvelUtilisateur={handleClose} onSuccess={handleSuccess} />
