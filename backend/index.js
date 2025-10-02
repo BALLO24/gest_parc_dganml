@@ -24,24 +24,24 @@ const PORT=process.env.PORT
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
-app.use(cors({
-    origin:true,
-    credentials:true,
-    
-}));
-
-// const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","http://10.133.2.55:3000"];
-
 // app.use(cors({
-//   origin: function (origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Requete bloqué par CORS"));
-//     }
-//   },
-//   credentials: true,
+//     origin:true,
+//     credentials:true,
+    
 // }));
+
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","http://10.133.2.122:3000","http://10.133.2.55:3000"];
+
+app.use(cors({
+  origin: function (origin, callback) {        
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Requete bloqué par CORS"));
+    }
+  },
+  credentials: true,
+}));
 
 
 app.use(
@@ -57,6 +57,7 @@ app.use(
       httpOnly: true,
       secure: false, // mettre true en production avec HTTPS
       maxAge: 1000 * 60 * 60 * 24, // 1 jour
+      //sameSite:"none"
     },
   })
 );

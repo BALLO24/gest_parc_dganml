@@ -65,7 +65,7 @@ import ModifAP from "../components/ModifAP";
 import ModifKVM from "../components/ModifKVM";
 import ModifAntenne from "../components/ModifAntenne";
 import ModifAutoComm from "../components/ModifAutoComm";
-import ModifTelephone from "../components/ModifTelePhone";
+import ModifTelephone from "../components/ModifTelephone";
 
 
 

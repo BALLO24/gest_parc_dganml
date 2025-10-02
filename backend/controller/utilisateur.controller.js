@@ -31,7 +31,7 @@ module.exports.signUp=async (req,res)=>{
     <p><strong style="color:#d9534f;">⚠️ Pour des raisons de sécurité, merci de changer ce mot de passe dès votre première connexion.</strong></p>
     
     <p style="text-align:center;">
-      <a href="127.0.0.1:5173" 
+      <a href="http://10.133.2.122:3000" 
          style="background:#2c7be5; color:#fff; padding:12px 20px; border-radius:6px; text-decoration:none; font-weight:bold;">
          Se connecter
       </a>
@@ -43,7 +43,7 @@ module.exports.signUp=async (req,res)=>{
   
   <!-- Footer -->
   <div style="background:#f4f6f8; padding:10px; text-align:center; font-size:12px; color:#777;">
-    &copy; 2025 Délégation ASECNA MALI. Tous droits réservés.
+    &copy; ${new Date().getFullYear()} Délégation ASECNA MALI. Tous droits réservés.
   </div>
 </div>
 `;
