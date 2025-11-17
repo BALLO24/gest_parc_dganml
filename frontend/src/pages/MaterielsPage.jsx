@@ -745,8 +745,8 @@ useEffect(() => {
                                     <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.marque}</td>
                                     <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.modele}</td>
                                     <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.noSerie}</td>
-                                    <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.userActuel.prenom} {" "} {item.userActuel.nom}</td>
-                                    <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.userActuel.site.nom}</td>
+                                    <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.userActuel?.prenom || "-"} {" "} {item.userActuel?.nom || "-"}</td>
+                                    <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.userActuel?.site.nom}</td>
                                     <td className="px-4 whitespace-nowrap text-sm text-gray-600">{item.etat}</td>
                                     <td className="px-6 whitespace-nowrap text-gray-600 ">
                                         <div className="relative inline-block text-left">
@@ -820,7 +820,7 @@ useEffect(() => {
                         Précedent
                     </button>
     
-                    {
+                    {/* {
                         Array.from({length:totalPages},(_, i)=> i + 1).map((number)=>
                             <button
                                 key={number}
@@ -830,7 +830,7 @@ useEffect(() => {
                                 {number}
                             </button>
                         )
-                    }
+                    } */}
     
                     <button
                         onClick={()=>paginate(Math.min(totalPages,currentPage + 1))}

@@ -203,7 +203,7 @@ export default function UtilisateursPage() {
             Précedent
           </button>
 
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+          {/* {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
             <button
               key={number}
               onClick={() => paginate(number)}
@@ -211,7 +211,7 @@ export default function UtilisateursPage() {
             >
               {number}
             </button>
-          ))}
+          ))} */}
 
           <button
             onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
